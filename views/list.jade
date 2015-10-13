@@ -1,0 +1,7 @@
+extends layout
+block content
+    h1= title
+    - users.forEach(function(user) {
+        p
+            a(href='/users/' + user._id)= user.name
+    - });
