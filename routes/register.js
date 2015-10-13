@@ -19,7 +19,7 @@ router.post('/', function(req, res) {
       });
     } else {
       //req.session.name = req.body.name;
-      res.redirect('/users/' + newUser._id);
+      res.redirect('../users/' + newUser._id);
     }
   });
 });
