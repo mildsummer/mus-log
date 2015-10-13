@@ -12,33 +12,33 @@ var users = require('./routes/users');
 var register = require('./routes/register');
 
 //Twitter OAuth
-var passport = require('passport');
-var TwitterStrategy = require('passport-twitter').Strategy;
-
-//Twitter Appsにて取得したConsumer Key (API Key)とConsumer Secret (API Secret)を記述
-var TWITTER_CONSUMER_KEY = "XXXXXXXXXXX";
-var TWITTER_CONSUMER_SECRET = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
-
-passport.serializeUser(function (user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function (obj, done) {
-  done(null, obj);
-});
-
-passport.use(new TwitterStrategy({
-    consumerKey: TWITTER_CONSUMER_KEY,
-    consumerSecret: TWITTER_CONSUMER_SECRET,
-    callbackURL: "/oauth/callback/" //Twitterログイン後、遷移するURL
-  },
-  function (token, tokenSecret, profile, done) {
-    console.log(token, tokenSecret, profile);
-    process.nextTick(function () {
-      return done(null, profile);
-    });
-  }
-));
+//var passport = require('passport');
+//var TwitterStrategy = require('passport-twitter').Strategy;
+//
+////Twitter Appsにて取得したConsumer Key (API Key)とConsumer Secret (API Secret)を記述
+//var TWITTER_CONSUMER_KEY = "XXXXXXXXXXX";
+//var TWITTER_CONSUMER_SECRET = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+//
+//passport.serializeUser(function (user, done) {
+//  done(null, user);
+//});
+//
+//passport.deserializeUser(function (obj, done) {
+//  done(null, obj);
+//});
+//
+//passport.use(new TwitterStrategy({
+//    consumerKey: TWITTER_CONSUMER_KEY,
+//    consumerSecret: TWITTER_CONSUMER_SECRET,
+//    callbackURL: "/oauth/callback/" //Twitterログイン後、遷移するURL
+//  },
+//  function (token, tokenSecret, profile, done) {
+//    console.log(token, tokenSecret, profile);
+//    process.nextTick(function () {
+//      return done(null, profile);
+//    });
+//  }
+//));
 
 var app = express();
 
