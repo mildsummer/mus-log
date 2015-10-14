@@ -3,10 +3,10 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
-  //- if(Object.keys(session).length > 0) {
-  //div
-  //  img(src=session.user.photos[0].value)
-  //div= session.user.displayName
-  //- } else {
-  //  a(href='/oauth') Twitterでログイン
-  //- }
+  - if(Object.keys(session).length > 0) {
+  div
+    img(src=session.user.photos[0].value)
+  div= session.user.displayName
+  - } else {
+    a(href='/oauth') Twitterでログイン
+  - }

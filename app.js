@@ -8,37 +8,38 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://heroku_7gfj5pff:3unsj9ohgopba69l4q9h4qrjbf@ds051893.mongolab.com:51893/heroku_7gfj5pff');
 
 var routes = require('./routes/index');
+var oauth = require('./routes/oauth');
 var users = require('./routes/users');
 var register = require('./routes/register');
 
 //Twitter OAuth
-//var passport = require('passport');
-//var TwitterStrategy = require('passport-twitter').Strategy;
-//
-////Twitter Appsにて取得したConsumer Key (API Key)とConsumer Secret (API Secret)を記述
-//var TWITTER_CONSUMER_KEY = "XXXXXXXXXXX";
-//var TWITTER_CONSUMER_SECRET = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
-//
-//passport.serializeUser(function (user, done) {
-//  done(null, user);
-//});
-//
-//passport.deserializeUser(function (obj, done) {
-//  done(null, obj);
-//});
-//
-//passport.use(new TwitterStrategy({
-//    consumerKey: TWITTER_CONSUMER_KEY,
-//    consumerSecret: TWITTER_CONSUMER_SECRET,
-//    callbackURL: "/oauth/callback/" //Twitterログイン後、遷移するURL
-//  },
-//  function (token, tokenSecret, profile, done) {
-//    console.log(token, tokenSecret, profile);
-//    process.nextTick(function () {
-//      return done(null, profile);
-//    });
-//  }
-//));
+var passport = require('passport');
+var TwitterStrategy = require('passport-twitter').Strategy;
+
+//Twitter Appsにて取得したConsumer Key (API Key)とConsumer Secret (API Secret)を記述
+var TWITTER_CONSUMER_KEY = "k3r6wTKnnX8QnK47ek2axO2fk";
+var TWITTER_CONSUMER_SECRET = "zlPQduFRktR3zKUgO8tJNVzh3eAjPSEWNxpZ9lipxAfP9jfK6i";
+
+passport.serializeUser(function (user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function (obj, done) {
+  done(null, obj);
+});
+
+passport.use(new TwitterStrategy({
+    consumerKey: TWITTER_CONSUMER_KEY,
+    consumerSecret: TWITTER_CONSUMER_SECRET,
+    callbackURL: "/oauth/callback" //Twitterログイン後、遷移するURL
+  },
+  function (token, tokenSecret, profile, done) {
+    console.log(token, tokenSecret, profile);
+    process.nextTick(function () {
+      return done(null, profile);
+    });
+  }
+));
 
 var app = express();
 
@@ -53,6 +54,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//session
+app.use(require('express-session')({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false
+}));
 
 app.use('/', routes);
 app.use('/users', users);
