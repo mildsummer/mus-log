@@ -63,6 +63,7 @@ app.use(require('express-session')({
 }));
 
 app.use('/', routes);
+app.use('/oauth', oauth);
 app.use('/users', users);
 app.use('/register', register);
 
