@@ -17,7 +17,7 @@ router.post('/post', function(req, res) {
       var image = body.toString('base64');
       var contribution = new Contribution({
         text: req.body.text,
-        base64: (image + base64prefix),
+        base64: (base64prefix + image),
         user: req.session.passport.user.id
       });
       contribution.save(function(err) {
