@@ -13,6 +13,7 @@ router.get('/', function(req, res, next) {
   User.findOne({_id: req.session.passport.id}).exec(function(err, user) {
     if(!err) {
       if(!user) {//初めてログインした場合はユーザー情報を保存
+        console.log(passport.id);
         var user = new User({_id: passport.id, name: passport.screen_name});
         user.save(function(err) {
           if(!err) {
