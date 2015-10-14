@@ -3,7 +3,7 @@ var router = express.Router();
 var request = require('request');
 var Contribution = require('../models/contribution');
 
-/* POSR contribute. */
+/* POST contribute. */
 router.post('/', function(req, res) {
   console.log(req.body);
   request(req.body.url, function (error, response, body) {
