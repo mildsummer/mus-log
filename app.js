@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://heroku_7gfj5pff:3unsj9ohgopba69l4q9h4qrjbf@ds051893.mongolab.com:51893/heroku_7gfj5pff');
+var flash = require('connect-flash');
 
 var routes = require('./routes/index');
 var oauth = require('./routes/oauth');
@@ -64,6 +65,7 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 
 app.use('/', routes);
 app.use('/oauth', oauth);

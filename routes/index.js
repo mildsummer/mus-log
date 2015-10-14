@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
   if(!passport) {
     res.render('login');
   }
-  User.findOne({_id: passport.user.id}).exec(function(err, user) {
+  User.findOne({_id: passport.user.id}).populate('contributions').exec(function(err, user) {
     if(!err) {
       if(!user) {//初めてログインした場合はユーザー情報を保存
         var user = new User({_id: passport.user.id, name: passport.user.displayName});

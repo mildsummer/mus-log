@@ -8,7 +8,7 @@ function validator(v) {
 var User = new mongoose.Schema({
   name   : { type: String, validate: [validator, "Empty Error"] }
   , created: { type: Date, default: Date.now }
-  , posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }]
+  , contributions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Contribution' }]
   , _id: { type: String, validate: [validator, "Empty Error"] }
 });
 

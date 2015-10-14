@@ -6,7 +6,10 @@ var Contribution = require('../models/contribution');
 /* POST contribute. */
 router.post('/post', function(req, res) {
   console.log(req.body);
-  request(req.body.url, function (error, response, body) {
+  request({
+    url: req.body.url,
+    encoding: null
+  }, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       console.log(body);
       var base64prefix = 'data:' + response.headers['content-type'] + ';base64,';
