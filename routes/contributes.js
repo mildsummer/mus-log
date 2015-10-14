@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 var Contribution = require('../models/contribution');
+var User = require('../models/user');
 
 /* POST contribute. */
 router.post('/post', function(req, res) {
@@ -21,9 +22,11 @@ router.post('/post', function(req, res) {
       });
       contribution.save(function(err) {
         if(!err) {
-          req.session.user.contributions.push(contribution._id);
-          req.session.user.save(function(err) {
-            res.redirect('/');
+          User.findOne({_id: req.session.passport.user.id}).exec(function(err, user) {
+            user.contributions.push(contribution._id);
+            user.save(function(err) {
+              res.redirect('/');
+            });
           });
         } else {
           res.render('error', {
