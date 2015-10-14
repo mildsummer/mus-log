@@ -9,6 +9,7 @@ var User = new mongoose.Schema({
   name   : { type: String, validate: [validator, "Empty Error"] }
   , created: { type: Date, default: Date.now }
   , posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }]
+  , _id: { type: String, validate: [validator, "Empty Error"] }
 });
 
 module.exports = mongoose.model('User', User);
