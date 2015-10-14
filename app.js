@@ -11,7 +11,7 @@ var routes = require('./routes/index');
 var oauth = require('./routes/oauth');
 var users = require('./routes/users');
 var register = require('./routes/register');
-var contribute = require('./routes/contribute');
+var contributes = require('./routes/contributes');
 
 //Twitter OAuth
 var passport = require('passport');
@@ -69,7 +69,7 @@ app.use('/', routes);
 app.use('/oauth', oauth);
 app.use('/users', users);
 app.use('/register', register);
-app.use('/contribute', contribute);
+app.use('/contributes', contributes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
