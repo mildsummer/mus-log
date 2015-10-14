@@ -5,7 +5,6 @@ var User = require('../models/user');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   console.log("index");
-  console.log(req.session.passport);
   var passport = req.session.passport;
   if(!passport) {
     res.render('login');
@@ -13,13 +12,12 @@ router.get('/', function(req, res, next) {
   User.findOne({_id: req.session.passport.id}).exec(function(err, user) {
     if(!err) {
       if(!user) {//初めてログインした場合はユーザー情報を保存
-        console.log(passport.id);
-        var user = new User({_id: passport.id, name: passport.screen_name});
+        var user = new User({_id: passport.user.id, name: passport.user.displayName});
         user.save(function(err) {
           if(!err) {
             res.render('index', {
               title: 'ユーザー登録を完了しました',
-              session: req.session.passport
+              session: passport
             });
           } else {
             res.render('error', {
@@ -31,7 +29,7 @@ router.get('/', function(req, res, next) {
       } else {
         res.render('index', {
           title: 'ユーザー登録済みです',
-          session: req.session.passport
+          session: passport
         });
       }
     } else {
