@@ -4,7 +4,7 @@ var request = require('request');
 var Contribution = require('../models/contribution');
 
 /* POST contribute. */
-router.post('/', function(req, res) {
+router.post('/post', function(req, res) {
   console.log(req.body);
   request(req.body.url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
