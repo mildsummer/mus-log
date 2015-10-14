@@ -7,6 +7,9 @@ router.get('/', function(req, res, next) {
   console.log("index");
   console.log(req.session.passport);
   var passport = req.session.passport;
+  if(!passport) {
+    res.render('login');
+  }
   User.findOne({_id: req.session.passport.id}).exec(function(err, user) {
     if(!err) {
       if(!user) {//初めてログインした場合はユーザー情報を保存
