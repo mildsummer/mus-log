@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
     if(!err) {
       if(!user) {//初めてログインした場合はユーザー情報を保存
         var newUser = new User({_id: passport.user.id, name: passport.user.displayName});
-        req.sesssion.user = newUser;
+        req.session.user = newUser;
         newUser.save(function(err) {
           if(!err) {
             res.render('index', {
@@ -28,7 +28,7 @@ router.get('/', function(req, res, next) {
           }
         });
       } else {
-        req.sesssion.user = user;
+        req.session.user = user;
         res.render('index', {
           title: 'ユーザー登録済みです',
           session: passport,
