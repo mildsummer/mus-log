@@ -3,9 +3,7 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     browserify = require('browserify'),
     source = require('vinyl-source-stream'),
-    server = require('gulp-webserver'),
     concat = require('gulp-concat'),
-    uglify = require('gulp-uglify'),
     autoprefix = require('gulp-autoprefixer'),
     cssmin = require('gulp-cssmin');
 
