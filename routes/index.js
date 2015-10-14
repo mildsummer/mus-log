@@ -29,7 +29,8 @@ router.get('/', function(req, res, next) {
       } else {
         res.render('index', {
           title: 'ユーザー登録済みです',
-          session: passport
+          session: passport,
+          contributions: user.contributions
         });
       }
     } else {

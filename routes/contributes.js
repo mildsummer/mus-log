@@ -21,10 +21,7 @@ router.post('/post', function(req, res) {
       });
       contribution.save(function(err) {
         if(!err) {
-          res.render('index', {
-            title: '投稿を完了しました',
-            session: req.session.passport
-          });
+          res.redirect('/');
         } else {
           res.render('error', {
             error: err,
