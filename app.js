@@ -61,6 +61,9 @@ app.use(require('express-session')({
   resave: false,
   saveUninitialized: false
 }));
+app.use(express.session({ secret: 'keyboard cat' }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', routes);
 app.use('/oauth', oauth);
