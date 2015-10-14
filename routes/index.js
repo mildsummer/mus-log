@@ -12,8 +12,9 @@ router.get('/', function(req, res, next) {
   User.findOne({_id: passport.user.id}).populate('contributions').exec(function(err, user) {
     if(!err) {
       if(!user) {//初めてログインした場合はユーザー情報を保存
-        var user = new User({_id: passport.user.id, name: passport.user.displayName});
-        user.save(function(err) {
+        var newUser = new User({_id: passport.user.id, name: passport.user.displayName});
+        req.sesssion.user = newUser;
+        newUser.save(function(err) {
           if(!err) {
             res.render('index', {
               title: 'ユーザー登録を完了しました',
@@ -27,6 +28,7 @@ router.get('/', function(req, res, next) {
           }
         });
       } else {
+        req.sesssion.user = user;
         res.render('index', {
           title: 'ユーザー登録済みです',
           session: passport,

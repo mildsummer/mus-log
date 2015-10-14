@@ -21,7 +21,10 @@ router.post('/post', function(req, res) {
       });
       contribution.save(function(err) {
         if(!err) {
-          res.redirect('/');
+          req.session.user.contributions.push(contribution._id);
+          req.session.user.save(function(err) {
+            res.redirect('/');
+          });
         } else {
           res.render('error', {
             error: err,
