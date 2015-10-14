@@ -52,4 +52,4 @@ gulp.task('sass', function () {
 //    gulp.watch(['./source/sass/*.scss'], ['sass']);
 //});
 
-gulp.task('default', ['sass', 'html', 'browserify']);
+gulp.task('default', ['sass', 'browserify']);
