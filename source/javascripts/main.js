@@ -55,7 +55,7 @@ $(function () {
   textures.forEach(function(texture) {
     var geometry = new THREE.BoxGeometry(100, 100, 100);
     var material = new THREE.MeshBasicMaterial();
-    material.map = textures[0];
+    material.map = texture;
     var box = new THREE.Mesh(geometry, material);
     box.position.set(Math.random() * 100, Math.random() * 100, Math.random() * 100);
     wrapper.add(box);
