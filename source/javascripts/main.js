@@ -1,10 +1,30 @@
 $(function () {
   var textures = [];
   $('.contribution').each(function () {
-    var texture = new THREE.Texture();
-    texture.image = this;
+    var image = checkSize($(this).find('img').get(0));
+    var texture = new THREE.Texture(image);
+    texture.magFilter = texture.minFilter = THREE.NearestFilter;
     texture.needsUpdate = true;
+    textures.push(texture);
   });
+
+  //テクスチャ用にサイズを修正
+  function checkSize(image) {
+    console.log(image);
+    var w = image.naturalWidth, h = image.naturalHeight;
+    var size = Math.pow(2, Math.log(Math.min(w, h)) / Math.LN2 | 0); // largest 2^n integer that does not exceed s
+    if (w !== h || w !== size) {
+      var canvas = document.createElement('canvas');
+      var offsetX = h / w > 1 ? 0 : (w - h) / 2;
+      var offsetY = h / w > 1 ? (h - w) / 2 : 0;
+      var clipSize = h / w > 1 ? w : h;
+      console.log(offsetX);
+      canvas.height = canvas.width = size;
+      canvas.getContext('2d').drawImage(image, offsetX, offsetY, clipSize, clipSize, 0, 0, size, size);
+      image = canvas;
+    }
+    return image;
+  }
 
   //var width = 1500.0;
   //var height = 500.0;
@@ -29,46 +49,25 @@ $(function () {
   document.body.appendChild(renderer.domElement);
 
   //init controls
-  var controls = new THREE.TrackballControls(bufferCamera);
+  var controls = new THREE.TrackballControls(camera, renderer.domElement);
 
-  // use "this." to create global object
-  var uniforms =
-  {
-    buffer: {type: "t", value: renderTarget},
-    texture1: {type: "t", value: textures[0]},
-    texture2: {type: "t", value: textures[1]},
-    texture3: {type: "t", value: textures[2]},
-    texture4: {type: "t", value: textures[3]},
-    texture5: {type: "t", value: textures[4]},
-    texture6: {type: "t", value: textures[5]},
-    size: {type: "v2", value: new THREE.Vector2(width, height)}
-  };
-
-  var planeGeometry = new THREE.PlaneGeometry(width, height);
-
-  var planeMaterial = new THREE.ShaderMaterial({
-    vertexShader: document.getElementById('vertexShader').textContent,
-    fragmentShader: document.getElementById('fragmentShader').textContent,
-    uniforms: uniforms
+  var wrapper = new THREE.Object3D();
+  textures.forEach(function(texture) {
+    var geometry = new THREE.BoxGeometry(100, 100, 100);
+    var material = new THREE.MeshBasicMaterial();
+    material.map = textures[0];
+    var box = new THREE.Mesh(geometry, material);
+    box.position.set(Math.random() * 100, Math.random() * 100, Math.random() * 100);
+    wrapper.add(box);
   });
-
-  //var planeMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, map: renderTarget });
-
-  var plane = new THREE.Mesh(planeGeometry, planeMaterial);
-  //plane.scale.set(width, height, 1);
-  scene.add(plane);
-  console.log(planeGeometry.vertices);
-
-  var torus = new THREE.Mesh(new THREE.TorusGeometry(300, 70, 16, 100), new THREE.MeshBasicMaterial({color: 0xffff00}));
-  bufferScene.add(torus);
+  scene.add(wrapper);
 
   update();
   window.addEventListener("resize", resize);
 
   function update() {
-    torus.rotation.y += 0.005;
+    wrapper.rotation.y += 0.005;
     controls.update();
-    renderer.render(bufferScene, bufferCamera, renderTarget);
     renderer.render(scene, camera);
     requestAnimationFrame(update);
   }
@@ -77,12 +76,8 @@ $(function () {
     width = window.innerWidth;
     height = window.innerHeight;
     renderer.setSize(width, height);
-    renderTarget.setSize(width, height);
-    uniforms.size.value.set(width, height);
-    console.log(uniforms.size.value);
-    camera.aspect = bufferCamera.aspect = width / height;
+    camera.aspect = width / height;
     camera.updateProjectionMatrix();
-    bufferCamera.updateProjectionMatrix();
   }
 
 });

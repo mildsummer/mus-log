@@ -14,9 +14,7 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~2.1.4"
-  },
-  "devDependencies": {
-    "three.js": "~0.72.0"
+    "jquery": "~2.1.4",
+    "threejs": "*"
   }
 }
