@@ -15,7 +15,7 @@ var gulp = require('gulp'),
 
 gulp.task('browserify', function() {
     browserify({
-        entries: './source/javascripts/main.js',
+        entries: './source/javascripts/main.es6',
         debug: true
     })
         .transform(babelify)
@@ -47,9 +47,10 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('./public/stylesheets'));
 });
 
-//gulp.task('watch', ['sass', 'browserify'], function () {
-//    gulp.watch(['./source/javascripts/*.js'], ['browserify']);
-//    gulp.watch(['./source/sass/*.scss'], ['sass']);
-//});
+gulp.task('watch', ['sass', 'browserify'], function () {
+    console.log('watch');
+    gulp.watch(['./source/javascripts/*.es6'], ['browserify']);
+    gulp.watch(['./source/sass/*.scss'], ['sass']);
+});
 
 gulp.task('default', ['sass', 'browserify']);
