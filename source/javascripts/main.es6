@@ -39,7 +39,7 @@ import Embryo from '../javascripts/embryo.es6';
         $scope.images = [];
         imageSearch.getImages($scope.query, function (res) {
           console.log(res);
-          $scope.images = res.items;
+          $scope.items = res.items;
         });
       };
     }]);
