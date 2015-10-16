@@ -13,7 +13,7 @@ import Embryo from '../javascripts/embryo.es6';
   //angular test
   angular.module('myServices', [])
     .service('imageSearch', ['$http', function ($http) {
-      this.getImages = function (queries, callback) {
+      this.getImages = function (query, callback) {
         var url = 'https://www.googleapis.com/customsearch/v1?key=AIzaSyCLRfeuR06RNPKbwFgoOnY0ze0IKESF7Kw&cx=001556568943546838350:0bdigrd1x8i&searchType=image&q=';
         query = encodeURIComponent(query.replace(/\s+/g, ' '));
 
