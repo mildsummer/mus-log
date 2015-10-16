@@ -36,7 +36,7 @@ import Embryo from '../javascripts/embryo.es6';
     .controller('myCtrl', ['$scope', 'imageSearch', function ($scope, imageSearch) {
       $scope.query = 'sky';
       $scope.submit = function () {
-        $scope.images = [];
+        $scope.items = [];
         imageSearch.getImages($scope.query, function (res) {
           console.log(res);
           $scope.items = res.items;

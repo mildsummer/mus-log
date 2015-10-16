@@ -25,7 +25,7 @@ block content
       input(type='button' ng-click='submit()' value='Search')
     p
       span(class='title') Results: {{ items.length }}
-      ul(class='item')
+      ul(class='items')
         li(ng-repeat='item in items')
           img(ng-src='{{item.image.thumbnailLink}}' target=_blank width='{{item.image.thumbnailWidth}}' height='{{item.image.thumbnailHeight}}')
   form(method="POST", action="./contributes/post")
