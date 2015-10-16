@@ -18,7 +18,7 @@ import Embryo from '../javascripts/embryo.es6';
         query = encodeURIComponent(query.replace(/\s+/g, ' '));
 
         $http({
-          url: url + query + '&sort=stars&order=desc',
+          url: url + query,
           method: 'GET'
         })
 
