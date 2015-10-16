@@ -40,9 +40,8 @@ angular.module("myApp", ['myServices'])
     $scope.queries = 'angular boilerplate';
     $scope.submit = function () {
       $scope.repos = [];
-
-      github.get_repos($scope.queries, function (res) {
-        $scope.repos = res.items;
-      });
     };
+    github.get_repos($scope.queries, function (res) {
+      $scope.repos = res.items;
+    });
   }]);
