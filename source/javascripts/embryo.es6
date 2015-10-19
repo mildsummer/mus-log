@@ -55,7 +55,7 @@ class Embryo {
     var controls = new THREE.TrackballControls(camera, renderer.domElement);
 
     var wrapper = new THREE.Object3D();
-    textures.forEach(function(texture) {
+    this.textures.forEach(function(texture) {
       var geometry = new THREE.BoxGeometry(100, 100, 100);
       var material = new THREE.MeshBasicMaterial();
       material.map = texture;
@@ -72,8 +72,7 @@ class Embryo {
       requestAnimationFrame(update);
     }
     update();
-
-    this.textures = textures;
+    
     this.scene = scene;
     this.camera = camera;
     this.renderer = renderer;
