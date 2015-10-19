@@ -23,7 +23,7 @@ class Embryo {
           this.initialize(container, width, height);
         }
       };
-      image.src = contribution.url;
+      image.src = contribution.base64;
     });
 
     return this;
