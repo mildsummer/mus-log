@@ -55,15 +55,16 @@ class Embryo {
     var controls = new THREE.TrackballControls(camera, renderer.domElement);
 
     var wrapper = new THREE.Object3D();
-    this.textures.forEach(function(texture) {
-      var geometry = new THREE.BoxGeometry(100, 100, 100);
-      var material = new THREE.MeshBasicMaterial();
-      material.map = texture;
-      var box = new THREE.Mesh(geometry, material);
-      box.position.set(Math.random() * 100, Math.random() * 100, Math.random() * 100);
-      wrapper.add(box);
-    });
     scene.add(wrapper);
+
+    this.scene = scene;
+    this.camera = camera;
+    this.renderer = renderer;
+    this.controls = controls;
+    this.wrapper = wrapper;
+
+    //セルの生成
+    this.textures.forEach(this.addCell.bind(this));
 
     function update() {
       wrapper.rotation.y += 0.005;
@@ -72,12 +73,6 @@ class Embryo {
       requestAnimationFrame(update);
     }
     update();
-    
-    this.scene = scene;
-    this.camera = camera;
-    this.renderer = renderer;
-    this.controls = controls;
-    this.wrapper = wrapper;
 
     return this;
 
@@ -106,8 +101,24 @@ class Embryo {
     return image;
   }
 
-  addContribution(contribution) {
+  addCell(texture) {
+    var geometry = new THREE.BoxGeometry(100, 100, 100);
+    var material = new THREE.MeshBasicMaterial();
+    material.map = texture;
+    var box = new THREE.Mesh(geometry, material);
+    box.position.set(Math.random() * 100, Math.random() * 100, Math.random() * 100);
+    this.wrapper.add(box);
+    return this;
+  }
 
+  addContribution(contribution) {
+    var image = new Image();
+    image.onload = () => {
+      var texture = Embryo.createTexture(image);
+      this.textures.push(texture);
+      this.addCell(texture);
+    };
+    image.src = contribution.base64;
     return this;
   }
 

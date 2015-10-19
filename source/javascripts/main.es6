@@ -2,6 +2,8 @@ import Embryo from '../javascripts/embryo.es6';
 
 (function () {
 
+  var embryo;
+
   //angular test
   angular.module('myServices', [])
     .service('imageSearch', ['$http', function ($http) {
@@ -64,7 +66,7 @@ import Embryo from '../javascripts/embryo.es6';
       //contibutionsを取得
       contributes.getAll(function(data) {
         $scope.contributions = data;
-        console.log(new Embryo(data, document.body, 1000, 500));
+        embryo = new Embryo(data, document.body, 1000, 500);
       });
 
       $scope.query = 'sky';
@@ -83,6 +85,9 @@ import Embryo from '../javascripts/embryo.es6';
       $scope.submit = function () {
         contributes.submit({ text: $scope.text, url: $scope.url }, function(data) {
           console.log(data);
+          //投稿の追加
+          $scope.contributions.push(data);
+          embryo.addContribution(data);
         });
       }
     }]);
