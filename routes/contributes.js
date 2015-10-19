@@ -43,12 +43,12 @@ router.post('/post', function(req, res) {
   })
 });
 
-router.get('/getAll', function(req, res) {
+router.get('/all', function(req, res) {
   Contribution.find({user: req.session.passport.user.id}).exec(function(err, contributions) {
     if(!err) {
       res.send(contributions);
     } else {
-      res.send(err);
+      res.send('データ取得エラー');
     }
   });
 });

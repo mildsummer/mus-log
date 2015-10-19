@@ -16,7 +16,6 @@ import Embryo from '../javascripts/embryo.es6';
       this.getImages = function (query, callback) {
         var url = 'https://www.googleapis.com/customsearch/v1?key=AIzaSyCLRfeuR06RNPKbwFgoOnY0ze0IKESF7Kw&cx=001556568943546838350:0bdigrd1x8i&searchType=image&q=';
         query = encodeURIComponent(query.replace(/\s+/g, ' '));
-
         $http({
           url: url + query,
           method: 'GET'
@@ -31,6 +30,23 @@ import Embryo from '../javascripts/embryo.es6';
       };
     }])
     .service('contributes', ['$http', function ($http) {
+      this.getAll = function (callback) {
+        $http({
+          url: '/contributes/all',
+          method: 'GET'
+        })
+          .success(function (data, status, headers, config) {
+            if(typeof data === 'string') {
+              alert(data);
+            } else {
+              callback(data)
+            }
+          })
+
+          .error(function (data, status, headers, config) {
+            alert(status + ' ' + data.message);
+          });
+      };
       this.submit = function (contribution, callback) {
         $http({
           url: '/contributes/post',
@@ -38,18 +54,28 @@ import Embryo from '../javascripts/embryo.es6';
           data: contribution
         })
           .success(function (data, status, headers, config) {
-            callback(data);
+            if(typeof data === 'string') {
+              alert(data);
+            } else {
+              callback(data)
+            }
           })
 
           .error(function (data, status, headers, config) {
-            aleart(status + ' ' + data.message);
+            alert(status + ' ' + data.message);
           });
       };
     }]);
 
   angular.module("myApp", ['myServices'])
     .controller('myCtrl', ['$scope', 'imageSearch', 'contributes', function ($scope, imageSearch, contributes) {
+      //contibutionsを取得
+      contributes.getAll(function(data) {
+        $scope.contributions = data;
+      });
+
       $scope.query = 'sky';
+
       $scope.search = function () {
         $scope.items = [];
         imageSearch.getImages($scope.query, function (res) {

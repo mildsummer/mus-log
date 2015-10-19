@@ -10,15 +10,11 @@ block content
   - } else {
     a(href='/oauth') Twitterでログイン
   - }
-  div.list
-  - if(contributions) {
-  - contributions.forEach(function(contribution) {
-  div.contribution
-    p= contribution.text
-    img(src=contribution.base64)
-  - })
-  - }
   div(ng-app="myApp" ng-controller="myCtrl")
+    div.list
+      div.contribution(ng-repeat='contribution in contributions')
+        p {{contribution.text}}
+        img(ng-src=contribution.base64)
     img(ng-src='{{selectedItem ? selectedItem.link : null}}' width='{{item.image.width}}' height='{{item.image.height}}')
     p
       span(class="title") Queries:
