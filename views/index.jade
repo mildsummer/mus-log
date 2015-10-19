@@ -14,7 +14,7 @@ block content
     div.list
       div.contribution(ng-repeat='contribution in contributions')
         p {{contribution.text}}
-        img(ng-src=contribution.base64)
+        img(ng-src='{{contribution.base64}}')
     img(ng-src='{{selectedItem ? selectedItem.link : null}}' width='{{item.image.width}}' height='{{item.image.height}}')
     p
       span(class="title") Queries:
