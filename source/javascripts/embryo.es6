@@ -10,12 +10,27 @@ class Embryo {
     //* }
     this.data = data;
 
-    var textures = [];
-    data.forEach((contribution) => {
-      var texture = Embryo.createTexture(contribution.image);
-      textures.push(texture);
+    //テクスチャの作成
+    this.textures = [];
+    var loadedNum = 0;
+    data.forEach((contribution, index) => {
+      var image = new Image();
+      image.onload = () => {
+        var texture = Embryo.createTexture(image);
+        this.textures[index] = texture;
+        loadedNum++;
+        if(loadedNum === data.length) {
+          this.initialize(container, width, height);
+        }
+      };
+      image.src = contribution.url;
     });
 
+    return this;
+
+  }
+
+  initialize(container, width, height) {
     this.width = width;
     this.height = height;
 
@@ -66,6 +81,7 @@ class Embryo {
     this.wrapper = wrapper;
 
     return this;
+
   }
 
   static createTexture(image) {
