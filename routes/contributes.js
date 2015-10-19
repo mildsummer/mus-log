@@ -25,18 +25,20 @@ router.post('/post', function(req, res) {
           User.findOne({_id: req.session.passport.user.id}).exec(function(err, user) {
             user.contributions.push(contribution._id);
             user.save(function(err) {
-              res.redirect('/');
+              if(!err) {
+                res.send(contribution);//投稿完了
+              } else {
+                res.send('データ書き込みエラー');
+              }
             });
           });
         } else {
-          res.render('error', {
-            error: err,
-            message: '投稿エラー'
-          });
+          res.send('投稿エラー');
         }
       });
     } else {
       console.log('error: '+ response.statusCode);
+      res.send('URLエラー');
     }
   })
 });

@@ -21,7 +21,6 @@ import Embryo from '../javascripts/embryo.es6';
           url: url + query,
           method: 'GET'
         })
-
           .success(function (data, status, headers, config) {
             callback(data);
           })
@@ -30,18 +29,42 @@ import Embryo from '../javascripts/embryo.es6';
             alert(status + ' ' + data.message);
           });
       };
+    }])
+    .service('contributes', ['$http', function ($http) {
+      this.submit = function (contribution, callback) {
+        $http({
+          url: '/contributes/post',
+          method: 'POST',
+          data: contribution
+        })
+          .success(function (data, status, headers, config) {
+            callback(data);
+          })
+
+          .error(function (data, status, headers, config) {
+            aleart(status + ' ' + data.message);
+          });
+      };
     }]);
 
   angular.module("myApp", ['myServices'])
-    .controller('myCtrl', ['$scope', 'imageSearch', function ($scope, imageSearch) {
+    .controller('myCtrl', ['$scope', 'imageSearch', 'contributes', function ($scope, imageSearch, contributes) {
       $scope.query = 'sky';
-      $scope.submit = function () {
+      $scope.search = function () {
         $scope.items = [];
         imageSearch.getImages($scope.query, function (res) {
           console.log(res);
           $scope.items = res.items;
         });
       };
+      $scope.select = function (item) {
+        $scope.selectedItem = item;
+      };
+      $scope.submit = function () {
+        contributes.submit({ text: $scope.text, url: $scope.url }, function(data) {
+          console.log(data);
+        });
+      }
     }]);
 
 })();
