@@ -57,8 +57,8 @@ import Embryo from '../javascripts/embryo.es6';
           $scope.items = res.items;
         });
       };
-      $scope.select = function (item) {
-        $scope.selectedItem = item;
+      $scope.select = function (url) {
+        $scope.selected = url;
       };
       $scope.submit = function () {
         contributes.submit({ text: $scope.text, url: $scope.url }, function(data) {
