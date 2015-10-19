@@ -15,6 +15,7 @@ router.post('/post', function(req, res) {
       console.log(body);
       var base64prefix = 'data:' + response.headers['content-type'] + ';base64,';
       var image = body.toString('base64');
+      console.log(body);
       var contribution = new Contribution({
         text: req.body.text,
         base64: (base64prefix + image),
