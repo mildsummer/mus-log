@@ -59,6 +59,7 @@ import Embryo from '../javascripts/embryo.es6';
       };
       $scope.select = function (item) {
         $scope.selectedItem = item;
+        $scope.url = item.link;
       };
       $scope.submit = function () {
         contributes.submit({ text: $scope.text, url: $scope.url }, function(data) {
