@@ -19,7 +19,7 @@ block content
   - })
   - }
   div(ng-app="myApp" ng-controller="myCtrl")
-    img(ng-src='{{selected ? selected : null}}')
+    img(ng-src='{{selectedItem ? selectedItem.link : null}}' width='{{item.image.width}}' height='{{item.image.height}}')
     p
       span(class="title") Queries:
       input(type='text' ng-model='query')
@@ -28,7 +28,7 @@ block content
       span(class='title') Results: {{ items.length }}
       ul(class='items')
         li(ng-repeat='item in items')
-          img(ng-src='{{item.image.thumbnailLink}}' width='{{item.image.thumbnailWidth}}' height='{{item.image.thumbnailHeight}}' ng-click='select({{item.link}})')
+          img(ng-src='{{item.image.thumbnailLink}}' width='{{item.image.thumbnailWidth}}' height='{{item.image.thumbnailHeight}}' ng-click='select(item)')
     form(method="POST" action="./contributes/post")
       input(type="text" ng-model="text" value="テキスト")
       input(type="text" ng-model="url" value="画像URL")
