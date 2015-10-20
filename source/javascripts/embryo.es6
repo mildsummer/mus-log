@@ -13,13 +13,12 @@ class Embryo {
     this.data = data;
 
     //テクスチャの作成
-    this.textures = [];
     var loadedNum = 0;
     data.forEach((contribution, index) => {
       var image = new Image();
       image.onload = () => {
         var texture = Embryo.createTexture(image);
-        this.textures[index] = texture;
+        this.data[index].texture = texture;
         loadedNum++;
         if(loadedNum === data.length) {
           this.initialize(container, width, height);
@@ -69,7 +68,7 @@ class Embryo {
     this.wrapper = wrapper;
 
     //セルの生成
-    this.textures.forEach(this.addCell.bind(this));
+    this.data.forEach(this.addCell.bind(this));
 
     function update() {
       wrapper.rotation.y += 0.005;
@@ -121,14 +120,23 @@ class Embryo {
     return image;
   }
 
-  addCell(texture) {
+  addCell(contribution) {
     var geometry = new THREE.BoxGeometry(100, 100, 100);
     var material = new THREE.MeshBasicMaterial();
-    material.map = texture;
+    material.map = contribution.texture;
     var box = new THREE.Mesh(geometry, material);
     box.position.set(Math.random() * 100, Math.random() * 100, Math.random() * 100);
     box.onmousemove = function() {
-      console.log('mousemove');
+      console.log('mousemove: ' + contribution.text);
+    };
+    box.onmouseover = function() {
+      console.log('mouseover: ' + contribution.text);
+    };
+    box.onmouseout = function() {
+      console.log('mouseout: ' + contribution.text);
+    };
+    box.onclick = function() {
+      console.log('click: ' + contribution.text);
     };
     this.wrapper.add(box);
     return this;
