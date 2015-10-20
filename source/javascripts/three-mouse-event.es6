@@ -67,11 +67,16 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
     preIntersects = intersects;
   });
 
-  function exist(intersects, targetIntersect {
-    intersects.forEach(function(intersect, index) {
-      if(intersect.object == tergetIntersect.object) return true;
-    });
-    return false;
+  function exist(intersects, targetIntersect) {
+    //intersects.forEach(function(intersect) {
+    //  if(intersect.object == targetIntersect.object) return true;
+    //});
+    //return false;
+    if(intersects.length > 0) {
+      return (intersects[0].object === targetIntersect.object);
+    } else {
+      return false;
+    }
   }
 
 };
