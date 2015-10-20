@@ -10,7 +10,7 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
         preIntersects.onmouseout();
       }
     });
-    mouseDown = preIntersects;
+    mouseDowns = preIntersects;
   });
 
   domElement.addEventListener('mouseup', function() {
@@ -36,6 +36,7 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
     raycaster.setFromCamera(mouse, camera);
 
     var intersects = raycaster.intersectObjects(_this.children, true);
+    console.log(intersects);
     intersects.forEach(function (intersect) {
       //onmousemove
       if (typeof intersect.onmousemove === 'function') {
