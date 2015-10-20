@@ -1,39 +1,45 @@
 THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
   var preIntersects = [];
-  var mouseDowns = [];
+  var mouseDownIntersects = [];
+  var preEvent;
   var _this = this;
 
-  domElement.addEventListener('mousedown', function() {
-    //onmousedown
-    preIntersects.forEach(function(preIntersect) {
-      var object = preIntersect.object;
-      if (typeof object.onmousedown === 'function') {
-        object.onmousedown();
-      }
-    });
-    mouseDowns = preIntersects;
-  });
+  function handleMouseDown(event) {
+    event.preventDefault();
 
-  domElement.addEventListener('mouseup', function() {
+    //onmousedown
+      preIntersects.forEach(function(preIntersect) {
+        var object = preIntersect.object;
+        if (typeof object.onmousedown === 'function') {
+          object.onmousedown();
+        }
+      });
+      mouseDownIntersects = preIntersects;
+  }
+
+  function handleMouseUp(event) {
+    event.preventDefault();
+
     //onmouseup
-    preIntersects.forEach(function(intersects) {
+    preIntersects.forEach(function(intersect) {
+      var object = intersect.object;
       if (typeof object.onmouseup === 'function') {
         object.onmouseup();
       }
     });
 
     //onclick
-    mouseDowns.forEach(function(mouseDown) {
-      var object = mouseDown.object;
+    mouseDownIntersects.forEach(function(intersect) {
+      var object = intersect.object;
       if (typeof object.onclick === 'function') {
-        if(exist(preIntersects, mouseDown)) {
+        if(exist(preIntersects, intersect)) {
           object.onclick();
         }
       }
     });
-  });
+  }
 
-  domElement.addEventListener('mousemove', function(event) {
+  function handleMouseMove(event) {
     event.preventDefault();
 
     var mouse = new THREE.Vector2();
@@ -74,18 +80,23 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
     });
 
     preIntersects = intersects;
-  });
+    preEvent = event;
+  }
 
   function exist(intersects, targetIntersect) {
     //intersects.forEach(function(intersect) {
     //  if(intersect.object == targetIntersect.object) return true;
     //});
     //return false;
-    if(intersects[0]) {
-      return (intersects[0].object === targetIntersect.object);
-    } else {
-      return false;
-    }
+    return (typeof intersects[0] === 'object') && (intersects[0].object === targetIntersect.object);
   }
+
+  domElement.addEventListener('mousedown', handleMouseDown);
+  domElement.addEventListener('mouseup', handleMouseUp);
+  domElement.addEventListener('mousemove', handleMouseMove);
+
+  THREE.Scene.prototype.handleMouseEvent = function() {
+    preEvent && handleMouseMove(preEvent);
+  };
 
 };

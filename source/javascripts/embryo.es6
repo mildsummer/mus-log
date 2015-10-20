@@ -74,6 +74,7 @@ class Embryo {
       wrapper.rotation.y += 0.005;
       controls.update();
       renderer.render(scene, camera);
+      scene.handleMouseEvent();
       requestAnimationFrame(update);
     }
     update();
@@ -162,9 +163,6 @@ class Embryo {
     this.camera.updateProjectionMatrix();
     return this;
   }
-
-  //マウスオーバー判定
-  bindMouseHover
 
 }
 
