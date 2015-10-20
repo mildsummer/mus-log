@@ -8,7 +8,7 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
     preIntersects.forEach(function(preIntersect) {
       var object = preIntersect.object;
       if (typeof object.onmousedown === 'function') {
-        object.onmouseout();
+        object.onmousedown();
       }
     });
     mouseDowns = preIntersects;
@@ -19,7 +19,7 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
     mouseDowns.forEach(function(mouseDown) {
       var object = mouseDown.object;
       if (typeof object.onclick === 'function') {
-        if(preIntersects.indexOf(mouseDown) >= 0) {
+        if(!exist(preIntersects, mouseDown)) {
           object.onclick();
         }
       }
@@ -48,7 +48,7 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
 
       //onmouseover
       if (typeof object.onmouseover === 'function') {
-        if (preIntersects.indexOf(intersect) < 0) {
+        if (!exist(preIntersects, intersect)) {
           object.onmouseover();
         }
       }
@@ -58,12 +58,20 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
     preIntersects.forEach(function(preIntersect) {
       var object = preIntersect.object;
       if (typeof object.onmouseout === 'function') {
-        if (intersects.indexOf(preIntersect) < 0) {
-          object.onmouseout();
+        if (!exist(intersects, preIntersect)) {
+          preIntersect.object.onmouseout();
         }
       }
     });
 
     preIntersects = intersects;
   });
+
+  function exist(intersects, targetIntersect {
+    intersects.forEach(function(intersect, index) {
+      if(intersect.object == tergetIntersect.object) return true;
+    });
+    return false;
+  }
+
 };
