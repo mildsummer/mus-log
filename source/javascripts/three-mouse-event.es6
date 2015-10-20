@@ -38,6 +38,8 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
     raycaster.setFromCamera(mouse, camera);
 
     var intersects = raycaster.intersectObjects(_this.children, true);
+    intersects.length = 1;//手前のオブジェクトのみ
+
     //console.log(intersects);
     intersects.forEach(function (intersect) {
       var object = intersect.object;
