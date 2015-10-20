@@ -38,7 +38,6 @@ class Embryo {
 
     //init scene
     var scene = new THREE.Scene();
-    scene.watchMouseEvent();
 
     //init camera
     var fov = 60;
@@ -56,6 +55,9 @@ class Embryo {
 
     //init controls
     var controls = new THREE.TrackballControls(camera, renderer.domElement);
+
+    //watch mouse events
+    scene.watchMouseEvent(renderer.domElement, camera);
 
     var wrapper = new THREE.Object3D();
     scene.add(wrapper);
