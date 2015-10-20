@@ -15,11 +15,18 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
   });
 
   domElement.addEventListener('mouseup', function() {
+    //onmouseup
+    preIntersects.forEach(function(intersects) {
+      if (typeof object.onmouseup === 'function') {
+        object.onmouseup();
+      }
+    });
+
     //onclick
     mouseDowns.forEach(function(mouseDown) {
       var object = mouseDown.object;
       if (typeof object.onclick === 'function') {
-        if(!exist(preIntersects, mouseDown)) {
+        if(exist(preIntersects, mouseDown)) {
           object.onclick();
         }
       }
