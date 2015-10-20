@@ -6,8 +6,9 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
   domElement.addEventListener('mousedown', function() {
     //onmousedown
     preIntersects.forEach(function(preIntersect) {
-      if (typeof preIntersect.onmousedown === 'function') {
-        preIntersects.onmouseout();
+      var object = preIntersect.object;
+      if (typeof object.onmousedown === 'function') {
+        object.onmouseout();
       }
     });
     mouseDowns = preIntersects;
@@ -16,9 +17,10 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
   domElement.addEventListener('mouseup', function() {
     //onclick
     mouseDowns.forEach(function(mouseDown) {
-      if (typeof mouseDown.onclick === 'function') {
+      var object = mouseDown.object;
+      if (typeof object.onclick === 'function') {
         if(preIntersects.indexOf(mouseDown) >= 0) {
-          mouseDown.onclick();
+          object.onclick();
         }
       }
     });
@@ -38,24 +40,26 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
     var intersects = raycaster.intersectObjects(_this.children, true);
     console.log(intersects);
     intersects.forEach(function (intersect) {
+      var object = intersect.object;
       //onmousemove
-      if (typeof intersect.onmousemove === 'function') {
-        intersect.onmousemove();
+      if (typeof object.onmousemove === 'function') {
+        object.onmousemove();
       }
 
       //onmouseover
-      if (typeof intersect.onmousemove === 'function') {
-        if (preIntersects.indexOf(intersect) < 0) {
-          intersect.onmouseover();
+      if (typeof object.onmousemove === 'function') {
+        if (preIntersects.indexOf(object) < 0) {
+          object.onmouseover();
         }
       }
     });
 
     //onmouseout
     preIntersects.forEach(function(preIntersect) {
-      if (typeof preIntersect.onmouseout === 'function') {
+      var object = preIntersect.object;
+      if (typeof object.onmouseout === 'function') {
         if (intersects.indexOf(preIntersect) < 0) {
-          preIntersects.onmouseout();
+          object.onmouseout();
         }
       }
     });
