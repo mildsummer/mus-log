@@ -1,4 +1,4 @@
-import Embryo from '../javascripts/embryo.es6';
+import Embryo from './embryo.es6';
 
 (function () {
 

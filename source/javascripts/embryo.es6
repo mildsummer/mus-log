@@ -1,3 +1,5 @@
+import './three-mouse-event.es6';
+
 class Embryo {
 
   constructor(data, container, width, height) {
@@ -36,6 +38,7 @@ class Embryo {
 
     //init scene
     var scene = new THREE.Scene();
+    scene.watchMouseEvent();
 
     //init camera
     var fov = 60;
@@ -78,6 +81,21 @@ class Embryo {
 
   }
 
+  //多面体の作成
+  static createSphere() {
+    var segments = Math.ceil(Math.sqrt(textures.length));
+    var sphere = new THREE.SphereGeometry(100, segments, segments);
+    var cells = [];
+    sphere.faces.forEach(function(face) {
+      cells.push({
+        a: sphere.vertices[face.a],
+        b: sphere.vertices[face.b],
+        c: sphere.vertices[face.c]
+      });
+    });
+    return cells;
+  }
+
   static createTexture(image) {
     var texture = new THREE.Texture(this.getSuitableImage(image));
     //texture.magFilter = texture.minFilter = THREE.NearestFilter;
@@ -88,7 +106,7 @@ class Embryo {
   //画像サイズを調整
   static getSuitableImage(image) {
     var w = image.naturalWidth, h = image.naturalHeight;
-    var size = Math.pow(2, Math.log(Math.min(w, h)) / Math.LN2 | 0); // largest 2^n integer that does not exceed s
+    var size = Math.pow(2, Math.log(Math.min(w, h)) / Math.LN2 | 0); // largest 2^n integer that does not exceed
     if (w !== h || w !== size) {
       var canvas = document.createElement('canvas');
       var offsetX = h / w > 1 ? 0 : (w - h) / 2;
@@ -107,6 +125,9 @@ class Embryo {
     material.map = texture;
     var box = new THREE.Mesh(geometry, material);
     box.position.set(Math.random() * 100, Math.random() * 100, Math.random() * 100);
+    box.onmousemove = function() {
+      console.log('mousemove');
+    };
     this.wrapper.add(box);
     return this;
   }
@@ -128,6 +149,9 @@ class Embryo {
     this.camera.updateProjectionMatrix();
     return this;
   }
+
+  //マウスオーバー判定
+  bindMouseHover
 
 }
 
