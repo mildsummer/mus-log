@@ -138,6 +138,9 @@ class Embryo {
     box.onclick = function() {
       console.log('click: ' + contribution.text);
     };
+    box.onmousedown = function() {
+      console.log('mousedown: ' + contribution.text);
+    };
     this.wrapper.add(box);
     return this;
   }

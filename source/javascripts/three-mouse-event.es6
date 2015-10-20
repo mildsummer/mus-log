@@ -48,7 +48,7 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
 
       //onmouseover
       if (typeof object.onmouseover === 'function') {
-        if (preIntersects.indexOf(object) < 0) {
+        if (preIntersects.indexOf(intersect) < 0) {
           object.onmouseover();
         }
       }
