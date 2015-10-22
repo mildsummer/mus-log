@@ -1,4 +1,5 @@
 import './three-mouse-event.es6';
+import './ConvexGeometry';
 
 class Embryo {
 
@@ -60,6 +61,9 @@ class Embryo {
 
     var wrapper = new THREE.Object3D();
     scene.add(wrapper);
+    
+    var mesh = new THREE.Mesh(createGeometry(100, 4), new THREE.MeshBasicMaterial({color: 0xff0000}));
+    scene.add(mesh);
 
     this.scene = scene;
     this.camera = camera;
@@ -83,19 +87,17 @@ class Embryo {
 
   }
 
-  //多面体の作成
-  static createSphere() {
-    var segments = Math.ceil(Math.sqrt(textures.length));
-    var sphere = new THREE.SphereGeometry(100, segments, segments);
-    var cells = [];
-    sphere.faces.forEach(function(face) {
-      cells.push({
-        a: sphere.vertices[face.a],
-        b: sphere.vertices[face.b],
-        c: sphere.vertices[face.c]
-      });
+  //三角の面で構成される多面体の作成
+  static createGeometry(radius, surfaceNumber) {
+    var vertices = [];
+    surfaceNumber = (surfaceNumber < 4) ? 4 : surfaceNumber;//４以下は不可
+    surfaceNumber = (surfaceNumber & 1) ? (surfaceNumber + 1) : surfaceNumber;//奇数は不可(より大きい偶数に直す)
+    vertices.length = 2 + surfaceNumber / 2;//頂点の数
+    vertices.forEach(function(value, index) {
+      vertices[index] = new THREE.Vector3(Math.random(), Math.random(), Math.random());//球状にランダムに点を打つ
+      vertices[index].setLength(radius);
     });
-    return cells;
+    return new THREE.ConvexGeometry(vertices);
   }
 
   static createTexture(image) {
@@ -127,21 +129,21 @@ class Embryo {
     material.map = contribution.texture;
     var box = new THREE.Mesh(geometry, material);
     box.position.set(Math.random() * 100, Math.random() * 100, Math.random() * 100);
-    box.onmousemove = function() {
-      console.log('mousemove: ' + contribution.text);
-    };
-    box.onmouseover = function() {
-      console.log('mouseover: ' + contribution.text);
-    };
-    box.onmouseout = function() {
-      console.log('mouseout: ' + contribution.text);
-    };
-    box.onclick = function() {
-      console.log('click: ' + contribution.text);
-    };
-    box.onmousedown = function() {
-      console.log('mousedown: ' + contribution.text);
-    };
+    //box.onmousemove = function() {
+    //  console.log('mousemove: ' + contribution.text);
+    //};
+    //box.onmouseover = function() {
+    //  console.log('mouseover: ' + contribution.text);
+    //};
+    //box.onmouseout = function() {
+    //  console.log('mouseout: ' + contribution.text);
+    //};
+    //box.onclick = function() {
+    //  console.log('click: ' + contribution.text);
+    //};
+    //box.onmousedown = function() {
+    //  console.log('mousedown: ' + contribution.text);
+    //};
     this.wrapper.add(box);
     return this;
   }
