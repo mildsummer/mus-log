@@ -62,7 +62,7 @@ class Embryo {
     var wrapper = new THREE.Object3D();
     scene.add(wrapper);
 
-    var mesh = new THREE.Mesh(this.createGeometry(100, 4), new THREE.MeshBasicMaterial({color: 0xff0000}));
+    var mesh = new THREE.Mesh(Embryo.createGeometry(100, 4), new THREE.MeshBasicMaterial({color: 0xff0000}));
     scene.add(mesh);
 
     this.scene = scene;
