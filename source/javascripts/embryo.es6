@@ -63,10 +63,10 @@ class Embryo {
     scene.add(wrapper);
 
 
-    var geometry = Embryo.createGeometry(100, this.data.length);
-    console.log(geometry);
-    var frames = Embryo.createFrames(geometry, this.data);
-    scene.add(frames);
+    this.geometry = Embryo.createGeometry(100, this.data.length);
+    console.log(this.geometry);
+    this.frames = Embryo.createFrames(this.geometry, this.data);
+    scene.add(this.frames);
 
     this.scene = scene;
     this.camera = camera;
@@ -77,13 +77,14 @@ class Embryo {
     //セルの生成
     //this.data.forEach(this.addCell.bind(this));
 
-    function update() {
+    var update = function(){
       wrapper.rotation.y += 0.005;
       controls.update();
       renderer.render(scene, camera);
       scene.handleMouseEvent();
+      this.moveVertices();
       requestAnimationFrame(update);
-    }
+    }.bind(this);
     update();
 
     return this;
@@ -171,6 +172,12 @@ class Embryo {
       image = canvas;
     }
     return image;
+  }
+
+  moveVertices() {
+    this.geometry.vertices.forEach((vertex, index) => {
+      this.geometry.vertices[index].applyEuler(new THREE.Euler(0.1, 0.1, 0, 'XYZ'));
+    });
   }
 
   addCell(contribution) {
