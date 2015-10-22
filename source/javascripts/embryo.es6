@@ -82,7 +82,7 @@ class Embryo {
       controls.update();
       renderer.render(scene, camera);
       scene.handleMouseEvent();
-      this.moveVertices();
+      //this.moveVertices();
       requestAnimationFrame(update);
     }.bind(this);
     update();
@@ -127,15 +127,6 @@ class Embryo {
       var frameGeometry = new THREE.Geometry();
       frameGeometry.vertices = [a, b, c];
       frameGeometry.faces = [new THREE.Face3(0, 1, 2)];
-      frameGeometry.verticesNeedUpdate = true;
-      frameGeometry.elementsNeedUpdate = true;
-      frameGeometry.uvsNeedUpdate = true;
-
-      frameGeometry.computeFaceNormals();
-      frameGeometry.computeVertexNormals();
-      frameGeometry.computeMorphNormals();
-      frameGeometry.normalsNeedUpdate = true;
-      console.log(frameGeometry);
 
       //create material
       var frameMaterial = new THREE.ShaderMaterial({
@@ -176,7 +167,16 @@ class Embryo {
 
   moveVertices() {
     this.geometry.vertices.forEach((vertex, index) => {
-      this.geometry.vertices[index].applyEuler(new THREE.Euler(0.1, 0.1, 0, 'XYZ'));
+      //動きをつける
+      vertex.preEuler = vertex.preEuler && Math.random() > 0.1 ? vertex.preEuler : new THREE.Euler(Math.random() * 0.02, Math.random() * 0.02, Math.random() * 0.02, 'XYZ');
+      vertex.applyEuler(vertex.preEuler);
+      //this.geometry.vertices[index].x++;
+    });
+    //console.log(this.frames.children[0].geometry.vertices[0]);
+    this.frames.children.forEach(function(frame) {
+      frame.geometry.verticesNeedUpdate = true;
+      frame.geometry.computeFaceNormals();
+      frame.geometry.computeVertexNormals();
     });
   }
 
