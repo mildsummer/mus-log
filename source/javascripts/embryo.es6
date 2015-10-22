@@ -48,7 +48,7 @@ class Embryo {
     scene.add(camera);
 
     //init renderer
-    var renderer = new THREE.WebGLRenderer();
+    var renderer = new THREE.WebGLRenderer({alpha: true});
     renderer.setSize(width, height);
     renderer.setClearColor(0xcccccc, 0);
     container.appendChild(renderer.domElement);
