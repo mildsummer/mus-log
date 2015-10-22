@@ -26,14 +26,14 @@ import Embryo from './embryo.es6';
     .service('contributes', ['$http', function ($http) {
       this.getAll = function (callback) {
         $http({
-          url: '/contributes/all',
+          url: '/contributesc/all',
+          //url: './javascripts/all.json',
           method: 'GET'
         })
           .success(function (data, status, headers, config) {
             if(typeof data === 'string') {
               alert(data);
             } else {
-              console.log(JSON.stringify(data));
               callback(data)
             }
           })

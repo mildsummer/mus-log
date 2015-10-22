@@ -62,8 +62,11 @@ class Embryo {
     var wrapper = new THREE.Object3D();
     scene.add(wrapper);
 
-    var mesh = new THREE.Mesh(Embryo.createGeometry(100, 4), new THREE.MeshBasicMaterial({color: 0xff0000}));
-    scene.add(mesh);
+
+    var geometry = Embryo.createGeometry(100, this.data.length);
+    console.log(geometry);
+    var frames = Embryo.createFrames(geometry, this.data);
+    scene.add(frames);
 
     this.scene = scene;
     this.camera = camera;
@@ -72,7 +75,7 @@ class Embryo {
     this.wrapper = wrapper;
 
     //セルの生成
-    this.data.forEach(this.addCell.bind(this));
+    //this.data.forEach(this.addCell.bind(this));
 
     function update() {
       wrapper.rotation.y += 0.005;
@@ -92,13 +95,59 @@ class Embryo {
     var vertices = [];
     surfaceNumber = (surfaceNumber < 4) ? 4 : surfaceNumber;//４以下は不可
     surfaceNumber = (surfaceNumber & 1) ? (surfaceNumber + 1) : surfaceNumber;//奇数は不可(より大きい偶数に直す)
-    vertices.length = 2 + surfaceNumber / 2;//頂点の数
-    vertices.forEach(function(value, index) {
-      vertices[index] = new THREE.Vector3(Math.random(), Math.random(), Math.random());//球状にランダムに点を打つ
-      vertices[index].setLength(radius);
-    });
-    console.log(vertices);
+    for(var i = 0, l = (2 + surfaceNumber / 2); i < l; i++) {
+      vertices[i] = new THREE.Vector3(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5);//球状にランダムに点を打つ
+      vertices[i].setLength(radius);
+    }
     return new THREE.ConvexGeometry(vertices);
+  }
+
+  static createFrames(geometry, data) {
+    var vertextShader = '' +
+      'varying vec4 vPosition;' +
+      'void main() {' +
+      '  gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);' +
+      '  vPosition = gl_Position;' +
+      '}';
+
+    var fragmentShader = '' +
+      'uniform sampler2D texture;' +
+      'varying vec4 vPosition;' +
+      'void main(void){' +
+      '      gl_FragColor = texture2D(texture, vec2((1.0 + vPosition.x / 100.0) / 2.0, (1.0 + vPosition.y / 100.0) / 2.0));' +
+      //'      gl_FragColor = vec4((vPosition.x / 100.0 + 1.0) / 2.0, (vPosition.y / 100.0 + 1.0) / 2.0, 0, 0);' +
+      '}';
+
+    var frames = new THREE.Object3D();
+    geometry.faces.forEach(function(face, index) {
+      var a = geometry.vertices[face.a], b = geometry.vertices[face.b], c = geometry.vertices[face.c];
+
+      //create geometry
+      var frameGeometry = new THREE.Geometry();
+      frameGeometry.vertices = [a, b, c];
+      frameGeometry.faces = [new THREE.Face3(0, 1, 2)];
+      frameGeometry.verticesNeedUpdate = true;
+      frameGeometry.elementsNeedUpdate = true;
+      frameGeometry.uvsNeedUpdate = true;
+
+      frameGeometry.computeFaceNormals();
+      frameGeometry.computeVertexNormals();
+      frameGeometry.computeMorphNormals();
+      frameGeometry.normalsNeedUpdate = true;
+      console.log(frameGeometry);
+
+      //create material
+      var frameMaterial = new THREE.ShaderMaterial({
+        vertexShader: vertextShader,
+        fragmentShader: fragmentShader,
+        uniforms: {
+          texture: { type: "t", value: data[index] ? data[index].texture : null }
+        }
+      });
+
+      frames.add(new THREE.Mesh(frameGeometry, frameMaterial));
+    });
+    return frames;
   }
 
   static createTexture(image) {
