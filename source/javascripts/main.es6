@@ -26,7 +26,7 @@ import Embryo from './embryo.es6';
     .service('contributes', ['$http', function ($http) {
       this.getAll = function (callback) {
         $http({
-          url: '/contributesc/all',
+          url: '/contributes/all',
           //url: './javascripts/all.json',
           method: 'GET'
         })
