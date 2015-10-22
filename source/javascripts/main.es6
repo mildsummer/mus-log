@@ -33,6 +33,7 @@ import Embryo from './embryo.es6';
             if(typeof data === 'string') {
               alert(data);
             } else {
+              console.log(JSON.stringify(data));
               callback(data)
             }
           })

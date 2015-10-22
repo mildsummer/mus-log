@@ -97,6 +97,7 @@ class Embryo {
       vertices[index] = new THREE.Vector3(Math.random(), Math.random(), Math.random());//球状にランダムに点を打つ
       vertices[index].setLength(radius);
     });
+    console.log(vertices);
     return new THREE.ConvexGeometry(vertices);
   }
 
