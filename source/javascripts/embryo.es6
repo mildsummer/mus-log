@@ -50,7 +50,7 @@ class Embryo {
     //init renderer
     var renderer = new THREE.WebGLRenderer();
     renderer.setSize(width, height);
-    renderer.setClearColorHex(0xffffff, 0);
+    renderer.setClearColor(0xffffff, 0);
     container.appendChild(renderer.domElement);
 
     //init controls
