@@ -74,7 +74,7 @@ class Embryo {
       renderer.render(scene, camera);
       scene.handleMouseEvent();
       this.count++;
-      this.moveVertices();
+      //this.moveVertices();
       requestAnimationFrame(update);
     }.bind(this);
     update();
