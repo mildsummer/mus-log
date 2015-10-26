@@ -33,6 +33,7 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
       var object = intersect.object;
       if (typeof object.onclick === 'function') {
         if(exist(preIntersects, intersect)) {
+          console.log(intersect);
           object.onclick();
         }
       }
@@ -52,7 +53,6 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
 
     var intersects = raycaster.intersectObjects(_this.children, true);
     intersects.length = 1;//手前のオブジェクトのみ
-    console.log(intersects[0]);
 
     //console.log(intersects);
     intersects.forEach(function (intersect) {
