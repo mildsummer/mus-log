@@ -69,7 +69,7 @@ import Embryo from './embryo.es6';
         $scope.contributions = data;
         embryo = new Embryo(data, document.body, 1000, 500);
         embryo.onselect = function(contribution) {
-          console.log(contribution);
+          console.log($scope);
           $scope.hasSelected = true;
           $scope.selectedContribution = contribution;
         };
@@ -98,7 +98,7 @@ import Embryo from './embryo.es6';
       };
       $scope.closeLightBox = function () {
         $scope.hasSelected = false;
-      }
+      };
     }]);
 
 })();
