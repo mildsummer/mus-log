@@ -59,24 +59,17 @@ class Embryo {
     //watch mouse events
     scene.watchMouseEvent(renderer.domElement, camera);
 
-    var wrapper = new THREE.Object3D();
-    scene.add(wrapper);
-
-    this.create();
-
     this.scene = scene;
     this.camera = camera;
     this.renderer = renderer;
     this.controls = controls;
-    this.wrapper = wrapper;
 
-    //セルの生成
-    //this.data.forEach(this.addCell.bind(this));
+    //生成
+    this.create();
 
     this.count = 0;
 
     var update = function(){
-      wrapper.rotation.y += 0.005;
       controls.update();
       renderer.render(scene, camera);
       scene.handleMouseEvent();
