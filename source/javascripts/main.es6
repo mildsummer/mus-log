@@ -99,6 +99,7 @@ import Embryo from './embryo.es6';
       };
       $scope.closeLightBox = function () {
         $scope.hasSelected = false;
+        $scope.$apply();
       };
     }]);
 
