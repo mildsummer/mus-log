@@ -26,8 +26,8 @@ import Embryo from './embryo.es6';
     .service('contributes', ['$http', function ($http) {
       this.getAll = function (callback) {
         $http({
-          url: '/contributes/all',
-          //url: './javascripts/all.json',
+          //url: '/contributes/all',
+          url: './javascripts/all.json',
           method: 'GET'
         })
           .success(function (data, status, headers, config) {
@@ -68,6 +68,11 @@ import Embryo from './embryo.es6';
       contributes.getAll(function(data) {
         $scope.contributions = data;
         embryo = new Embryo(data, document.body, 1000, 500);
+        embryo.onselect = function(contribution) {
+          console.log(contribution);
+          $scope.hasSelected = true;
+          $scope.selectedContribution = contribution;
+        };
       });
 
       $scope.query = 'sky';
@@ -90,6 +95,9 @@ import Embryo from './embryo.es6';
           $scope.contributions.push(data);
           embryo.addContribution(data);
         });
+      };
+      $scope.closeLightBox = function () {
+        $scope.hasSelected = false;
       }
     }]);
 

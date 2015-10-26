@@ -66,6 +66,13 @@ class Embryo {
     this.geometry = Embryo.createGeometry(100, this.data.length);
     console.log(this.geometry);
     this.frames = Embryo.createFrames(this.geometry, this.data);
+    this.frames.children.forEach((frame) => {//マウスイベントの設定
+      frame.onclick = () => {
+        if(typeof this.onselect === 'function') {
+          this.onselect(frame.data);
+        }
+      };
+    });
     scene.add(this.frames);
 
     this.scene = scene;
@@ -113,9 +120,12 @@ class Embryo {
 
     var fragmentShader = '' +
       'uniform sampler2D texture;' +
+      'uniform float opacity;' +
       'varying vec4 vPosition;' +
       'void main(void){' +
-      '      gl_FragColor = texture2D(texture, vec2((1.0 + vPosition.x / 100.0) / 2.0, (1.0 + vPosition.y / 100.0) / 2.0));' +
+      '  vec4 textureColor = texture2D(texture, vec2((1.0 + vPosition.x / 100.0) / 2.0, (1.0 + vPosition.y / 100.0) / 2.0));' +
+      '  textureColor.w = opacity;' +
+      '  gl_FragColor = textureColor;' +
       //'      gl_FragColor = vec4((vPosition.x / 100.0 + 1.0) / 2.0, (vPosition.y / 100.0 + 1.0) / 2.0, 0, 0);' +
       '}';
 
@@ -133,11 +143,15 @@ class Embryo {
         vertexShader: vertextShader,
         fragmentShader: fragmentShader,
         uniforms: {
-          texture: { type: "t", value: data[index] ? data[index].texture : null }
+          texture: { type: "t", value: data[index] ? data[index].texture : null },
+          opacity: { type: "f", value: 1.0 }
         }
       });
 
-      frames.add(new THREE.Mesh(frameGeometry, frameMaterial));
+      var mesh = new THREE.Mesh(frameGeometry, frameMaterial);
+      mesh.data = data[index];
+
+      frames.add(mesh);
     });
     return frames;
   }
