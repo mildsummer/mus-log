@@ -84,12 +84,15 @@ class Embryo {
     //セルの生成
     //this.data.forEach(this.addCell.bind(this));
 
+    this.count = 0;
+
     var update = function(){
       wrapper.rotation.y += 0.005;
       controls.update();
       renderer.render(scene, camera);
       scene.handleMouseEvent();
-      //this.moveVertices();
+      this.count++;
+      this.moveVertices();
       requestAnimationFrame(update);
     }.bind(this);
     update();
@@ -106,6 +109,7 @@ class Embryo {
     for(var i = 0, l = (2 + surfaceNumber / 2); i < l; i++) {
       vertices[i] = new THREE.Vector3(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5);//球状にランダムに点を打つ
       vertices[i].setLength(radius);
+      vertices[i].originalLength = radius;
     }
     return new THREE.ConvexGeometry(vertices);
   }
@@ -182,9 +186,7 @@ class Embryo {
   moveVertices() {
     this.geometry.vertices.forEach((vertex, index) => {
       //動きをつける
-      vertex.preEuler = vertex.preEuler && Math.random() > 0.1 ? vertex.preEuler : new THREE.Euler(Math.random() * 0.02, Math.random() * 0.02, Math.random() * 0.02, 'XYZ');
-      vertex.applyEuler(vertex.preEuler);
-      //this.geometry.vertices[index].x++;
+      vertex.setLength(vertex.originalLength + Math.cos(this.count + index * 10) * 10);
     });
     //console.log(this.frames.children[0].geometry.vertices[0]);
     this.frames.children.forEach(function(frame) {
