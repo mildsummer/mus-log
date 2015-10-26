@@ -72,6 +72,7 @@ import Embryo from './embryo.es6';
           console.log($scope);
           $scope.hasSelected = true;
           $scope.selectedContribution = contribution;
+          $scope.$apply();
         };
       });
 
