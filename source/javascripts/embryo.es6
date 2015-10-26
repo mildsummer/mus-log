@@ -62,18 +62,7 @@ class Embryo {
     var wrapper = new THREE.Object3D();
     scene.add(wrapper);
 
-
-    this.geometry = Embryo.createGeometry(100, this.data.length);
-    console.log(this.geometry);
-    this.frames = Embryo.createFrames(this.geometry, this.data);
-    this.frames.children.forEach((frame) => {//マウスイベントの設定
-      frame.onclick = () => {
-        if(typeof this.onselect === 'function') {
-          this.onselect(frame.data);
-        }
-      };
-    });
-    scene.add(this.frames);
+    this.create();
 
     this.scene = scene;
     this.camera = camera;
@@ -99,6 +88,21 @@ class Embryo {
 
     return this;
 
+  }
+
+  create() {
+    this.geometry = Embryo.createGeometry(100, this.data.length);
+    this.frames = Embryo.createFrames(this.geometry, this.data);
+    this.frames.children.forEach((frame) => {//マウスイベントの設定
+      frame.onclick = () => {
+        if(typeof this.onselect === 'function') {
+          this.onselect(frame.data);
+        }
+      };
+    });
+    this.scene.add(this.frames);
+
+    return this;
   }
 
   //三角の面で構成される多面体の作成
@@ -194,41 +198,37 @@ class Embryo {
       frame.geometry.computeFaceNormals();
       frame.geometry.computeVertexNormals();
     });
-  }
 
-  addCell(contribution) {
-    var geometry = new THREE.BoxGeometry(100, 100, 100);
-    var material = new THREE.MeshBasicMaterial();
-    material.map = contribution.texture;
-    var box = new THREE.Mesh(geometry, material);
-    box.position.set(Math.random() * 100, Math.random() * 100, Math.random() * 100);
-    //box.onmousemove = function() {
-    //  console.log('mousemove: ' + contribution.text);
-    //};
-    //box.onmouseover = function() {
-    //  console.log('mouseover: ' + contribution.text);
-    //};
-    //box.onmouseout = function() {
-    //  console.log('mouseout: ' + contribution.text);
-    //};
-    //box.onclick = function() {
-    //  console.log('click: ' + contribution.text);
-    //};
-    //box.onmousedown = function() {
-    //  console.log('mousedown: ' + contribution.text);
-    //};
-    this.wrapper.add(box);
     return this;
   }
 
+  /*
+    three.jsオブジェクトの削除
+   */
+  clear() {
+    this.geometry.dispose();
+    this.frames.children.forEach(function(frame) {
+      frame.geometry.dispose();
+      frame.material.dispose();
+    });
+    this.scene.remove(this.frames);
+
+    return this;
+  }
+
+  /*
+    contributionの追加
+    @param contribution {Object} 投稿
+   */
   addContribution(contribution) {
     var image = new Image();
     image.onload = () => {
-      var texture = Embryo.createTexture(image);
-      this.textures.push(texture);
-      this.addCell(texture);
+      contribution.texture = Embryo.createTexture(image);
+      this.data.push(contribution);
+      this.clear().create();//リセット
     };
     image.src = contribution.base64;
+
     return this;
   }
 
