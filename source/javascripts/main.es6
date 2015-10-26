@@ -97,9 +97,8 @@ import Embryo from './embryo.es6';
           embryo.addContribution(data);
         });
       };
-      $scope.closeLightBox = function () {
+      $scope.closeLightbox = function () {
         $scope.hasSelected = false;
-        $scope.$apply();
       };
     }]);
 
