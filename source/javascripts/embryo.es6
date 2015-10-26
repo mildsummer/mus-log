@@ -186,7 +186,7 @@ class Embryo {
   moveVertices() {
     this.geometry.vertices.forEach((vertex, index) => {
       //動きをつける
-      vertex.setLength(vertex.originalLength + Math.cos(this.count + index * 10) * 10);
+      vertex.setLength(vertex.originalLength + Math.cos(this.count/100 + index * 10) * 10);
     });
     //console.log(this.frames.children[0].geometry.vertices[0]);
     this.frames.children.forEach(function(frame) {
