@@ -1,6 +1,10 @@
 import './three-mouse-event.es6';
 import './ConvexGeometry';
 
+THREE.Vector3.prototype.mix = function(y, a) {
+  return this.multiplyScalar(1 - a).add(y.clone().multiplyScalar(a))
+};
+
 class Embryo {
 
   constructor(data, container, width, height) {
@@ -69,12 +73,14 @@ class Embryo {
 
     this.count = 0;
 
+    console.log(this.frames);
+
     var update = function(){
       controls.update();
       renderer.render(scene, camera);
       scene.handleMouseEvent();
       this.count++;
-      //this.moveVertices();
+      this.moveVertices();
       requestAnimationFrame(update);
     }.bind(this);
     update();
@@ -138,6 +144,8 @@ class Embryo {
       var frameGeometry = new THREE.Geometry();
       frameGeometry.vertices = [a, b, c];
       frameGeometry.faces = [new THREE.Face3(0, 1, 2)];
+      frameGeometry.computeFaceNormals();
+      frameGeometry.computeVertexNormals();
 
       //create material
       var frameMaterial = new THREE.ShaderMaterial({
@@ -181,12 +189,11 @@ class Embryo {
   }
 
   moveVertices() {
-    this.geometry.vertices.forEach((vertex, index) => {
-      //動きをつける
-      vertex.setLength(vertex.originalLength + Math.cos(this.count/100 + index * 10) * 10);
-    });
     //console.log(this.frames.children[0].geometry.vertices[0]);
     this.frames.children.forEach(function(frame) {
+      frame.geometry.vertices.forEach(function(vertex) {
+        vertex.mix(frame.geometry.faces[0].normal, 0.1).setLength(vertex.originalLength);
+      });
       frame.geometry.verticesNeedUpdate = true;
       frame.geometry.computeFaceNormals();
       frame.geometry.computeVertexNormals();

@@ -27,8 +27,8 @@ import Embryo from './embryo.es6';
       this.getAll = function (callback) {
         $http({
           url: '/contributes/all',
-          //url: './javascripts/all.json',
-          method: 'GET'
+          url: './javascripts/all.json',
+          //method: 'GET'
         })
           .success(function (data, status, headers, config) {
             if(typeof data === 'string') {
@@ -68,6 +68,7 @@ import Embryo from './embryo.es6';
       contributes.getAll(function(data) {
         $scope.contributions = data;
         embryo = new Embryo(data, document.body, 1000, 500);
+        window.embryo = embryo;
         embryo.onselect = function(contribution) {
           console.log($scope);
           $scope.hasSelected = true;
