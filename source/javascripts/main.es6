@@ -27,8 +27,8 @@ import Embryo from './embryo.es6';
       this.getAll = function (callback) {
         $http({
           url: '/contributes/all',
-          url: './javascripts/all.json',
-          //method: 'GET'
+          //url: './javascripts/all.json',
+          method: 'GET'
         })
           .success(function (data, status, headers, config) {
             if(typeof data === 'string') {

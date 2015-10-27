@@ -34,7 +34,7 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
       if (typeof object.onclick === 'function') {
         if(exist(preIntersects, intersect)) {
           console.log(intersect);
-          object.onclick();
+          object.onclick(intersect);
         }
       }
     });

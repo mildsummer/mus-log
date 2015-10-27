@@ -93,9 +93,11 @@ class Embryo {
     this.geometry = Embryo.createGeometry(100, this.data.length);
     this.frames = Embryo.createFrames(this.geometry, this.data);
     this.frames.children.forEach((frame) => {//マウスイベントの設定
-      frame.onclick = () => {
+      frame.onclick = (intersect) => {
         if(typeof this.onselect === 'function') {
           this.onselect(frame.data);
+          console.log(intersect);
+          intersect.face.hasSelected = true;
         }
       };
     });
@@ -191,9 +193,10 @@ class Embryo {
   moveVertices() {
     //console.log(this.frames.children[0].geometry.vertices[0]);
     this.frames.children.forEach(function(frame) {
+      var face = frame.geometry.faces[0];
       frame.geometry.vertices.forEach(function(vertex) {
-        vertex.mix(frame.geometry.faces[0].normal, 0.1).setLength(vertex.originalLength);
-      });
+        vertex.mix(face.normal, 0.1).setLength(vertex.originalLength);
+    });
       frame.geometry.verticesNeedUpdate = true;
       frame.geometry.computeFaceNormals();
       frame.geometry.computeVertexNormals();
