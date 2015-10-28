@@ -4,7 +4,7 @@ block content
   div.container
     header
       h1 Embryo
-      h2 session.user.displayName
+      h2= session.user.displayName
     div(class="embryo" ng-app="embryo" ng-controller="myCtrl")
       //div.list
       //  div.contribution(ng-repeat='contribution in contributions')
