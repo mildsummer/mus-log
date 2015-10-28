@@ -38,7 +38,7 @@ gulp.task('browserify', function() {
 //});
 
 gulp.task('sass', function () {
-    gulp.src('./source/sass/*.scss')
+    gulp.src('./source/stylesheets/*.scss')
         .pipe(sass({includePaths: ['./styles'],
                     errLogToConsole: true}))
         .pipe(autoprefix("last 1 version",

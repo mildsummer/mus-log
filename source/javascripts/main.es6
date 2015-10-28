@@ -26,8 +26,8 @@ import Embryo from './embryo.es6';
     .service('contributes', ['$http', function ($http) {
       this.getAll = function (callback) {
         $http({
-          url: '/contributes/all',
-          //url: './javascripts/all.json',
+          //url: '/contributes/all',
+          url: './javascripts/all.json',
           method: 'GET'
         })
           .success(function (data, status, headers, config) {
@@ -62,18 +62,37 @@ import Embryo from './embryo.es6';
       };
     }]);
 
-  angular.module("myApp", ['myServices'])
+  angular.module("embryo", ['myServices'])
     .controller('myCtrl', ['$scope', 'imageSearch', 'contributes', function ($scope, imageSearch, contributes) {
       //contibutionsを取得
       contributes.getAll(function(data) {
         $scope.contributions = data;
-        embryo = new Embryo(data, document.body, 1000, 500);
+        var container = $('.embryo-three');
+        var contributionImage = $('.embryo-contribution-image');
+        embryo = new Embryo(data, container.get(0), container.width(), container.height());
         window.embryo = embryo;
         embryo.onselect = function(contribution) {
-          console.log($scope);
-          $scope.hasSelected = true;
-          $scope.selectedContribution = contribution;
-          $scope.$apply();
+          if ($scope.hasSelected) {
+            $scope.hasSelected = false;
+            container.css({
+              '-webkit-filter': 'blur(0px)'
+            });
+            contributionImage.css({
+              'opacity': 0
+            });
+          } else {
+            $scope.hasSelected = true;
+            $scope.selectedContribution = contribution;
+            $scope.$apply();
+            contributionImage.css({
+              'backgroundImage': 'url(' + contribution.base64 + ')',
+              'backgroundSize': 'cover',
+              'opacity': 1
+            });
+            container.css({
+              '-webkit-filter': 'blur(10px)'
+            })
+          }
         };
       });
 

@@ -78,9 +78,9 @@ class Embryo {
     var update = function(){
       controls.update();
       renderer.render(scene, camera);
-      scene.handleMouseEvent();
+      //scene.handleMouseEvent();
       this.count++;
-      this.moveVertices();
+      this.moveVertices().rotate();
       requestAnimationFrame(update);
     }.bind(this);
     update();
@@ -96,10 +96,11 @@ class Embryo {
       frame.onclick = (intersect) => {
         if(typeof this.onselect === 'function') {
           this.onselect(frame.data);
-          console.log(intersect);
-          intersect.face.hasSelected = true;
         }
       };
+      //frame.onmouseover = (intersect) => {
+      //  intersect.face.mouseon = true;
+      //};
     });
     this.scene.add(this.frames);
 
@@ -199,10 +200,13 @@ class Embryo {
     });
       frame.geometry.verticesNeedUpdate = true;
       frame.geometry.computeFaceNormals();
-      frame.geometry.computeVertexNormals();
     });
 
     return this;
+  }
+
+  rotate() {
+    this.frames.rotation.set(0, this.count/200, 0);
   }
 
   /*

@@ -2,19 +2,23 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
   var preIntersects = [];
   var mouseDownIntersects = [];
   var preEvent;
+  var mouseDownPoint = new THREE.Vector2();
   var _this = this;
 
   function handleMouseDown(event) {
     event.preventDefault();
 
     //onmousedown
-      preIntersects.forEach(function(preIntersect) {
-        var object = preIntersect.object;
-        if (typeof object.onmousedown === 'function') {
-          object.onmousedown();
-        }
-      });
-      mouseDownIntersects = preIntersects;
+    preIntersects.forEach(function(preIntersect) {
+      var object = preIntersect.object;
+      if (typeof object.onmousedown === 'function') {
+        object.onmousedown(preIntersect);
+      }
+    });
+    mouseDownIntersects = preIntersects;
+
+    preEvent = event;
+    mouseDownPoint = new THREE.Vector2(event.clientX, event.clientY);
   }
 
   function handleMouseUp(event) {
@@ -24,20 +28,23 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
     preIntersects.forEach(function(intersect) {
       var object = intersect.object;
       if (typeof object.onmouseup === 'function') {
-        object.onmouseup();
+        object.onmouseup(intersect);
       }
     });
 
-    //onclick
-    mouseDownIntersects.forEach(function(intersect) {
-      var object = intersect.object;
-      if (typeof object.onclick === 'function') {
-        if(exist(preIntersects, intersect)) {
-          console.log(intersect);
-          object.onclick(intersect);
+    if(mouseDownPoint.distanceTo(new THREE.Vector2(event.clientX, event.clientY)) < 5) {
+      //onclick
+      mouseDownIntersects.forEach(function (intersect) {
+        var object = intersect.object;
+        if (typeof object.onclick === 'function') {
+          if (exist(preIntersects, intersect)) {
+            object.onclick(intersect);
+          }
         }
-      }
-    });
+      });
+    }
+
+    preEvent = event;
   }
 
   function handleMouseMove(event) {
@@ -59,13 +66,13 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
       var object = intersect.object;
       //onmousemove
       if (typeof object.onmousemove === 'function') {
-        object.onmousemove();
+        object.onmousemove(intersect);
       }
 
       //onmouseover
       if (typeof object.onmouseover === 'function') {
         if (!exist(preIntersects, intersect)) {
-          object.onmouseover();
+          object.onmouseover(intersect);
         }
       }
     });
@@ -75,7 +82,7 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
       var object = preIntersect.object;
       if (typeof object.onmouseout === 'function') {
         if (!exist(intersects, preIntersect)) {
-          preIntersect.object.onmouseout();
+          preIntersect.object.onmouseout(preIntersect);
         }
       }
     });
