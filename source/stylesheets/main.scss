@@ -67,22 +67,18 @@ header {
     .embryo-post-search {
       position: absolute;
       left: 0;
-      opacity: 1;
       transition: left 0.3s ease;
     }
     .embryo-post-search.hidden {
       left: -100%;
-      opacity: 0;
     }
     .embryo-post-contribute {
       position: absolute;
       left: 0;
-      opacity: 1;
       transition: left 0.3s ease;
     }
     .embryo-post-contribute.hidden {
       left: 100%;
-      opacity: 0;
     }
   }
   .embryo-post.shown {
