@@ -131,7 +131,7 @@ import Embryo from './embryo.es6';
           $scope.contributions.push(data);
           embryo.addContribution(data);
         });
-        $scope.visibility.postSearch = ture;
+        $scope.visibility.postSearch = true;
         $scope.visibility.postContribute = false;
       };
       $scope.closeLightbox = function () {
@@ -142,6 +142,10 @@ import Embryo from './embryo.es6';
       };
       $scope.toggleContributionDetails = function () {
         $scope.visibility.contributionDetails = $scope.visibility.contributionDetails == 'opened' ? 'shown' : 'opened';
+      };
+      $scope.backToSearch = function () {
+        $scope.visibility.postSearch = true;
+        $scope.visibility.postContribute = false;
       }
     }]);
 

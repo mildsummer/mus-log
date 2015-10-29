@@ -60,25 +60,28 @@ header {
     display: none;
     width: 100%;
     height: 100%;
-    left: 20%;
     position: absolute;
     z-index: 1;
     background-color: #FFF;
     transition: all 0.3s ease;
     .embryo-post-search {
-      margin-left: 0;
+      position: absolute;
+      left: 0;
       opacity: 1;
+      transition: left 0.3s ease;
     }
     .embryo-post-search.hidden {
-      margin-left: -100%;
+      left: -100%;
       opacity: 0;
     }
     .embryo-post-contribute {
-      margin-left: 0;
+      position: absolute;
+      left: 0;
       opacity: 1;
+      transition: left 0.3s ease;
     }
     .embryo-post-contribute.hidden {
-      margin-left: 100%;
+      left: 100%;
       opacity: 0;
     }
   }
