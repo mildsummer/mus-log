@@ -74,6 +74,9 @@ import Embryo from './embryo.es6';
         embryo.onselect = function(contribution) {
           if ($scope.hasSelected) {
             $scope.hasSelected = false;
+            $scope.visibility.contributionDetails = 'hidden';
+            $scope.visibility.plusButton = true;
+            $scope.$apply();
             container.css({
               '-webkit-filter': 'blur(0px)'
             });
@@ -82,6 +85,8 @@ import Embryo from './embryo.es6';
             });
           } else {
             $scope.hasSelected = true;
+            $scope.visibility.contributionDetails = 'shown';
+            $scope.visibility.plusButton = false;
             $scope.selectedContribution = contribution;
             $scope.$apply();
             contributionImage.css({
@@ -96,6 +101,14 @@ import Embryo from './embryo.es6';
         };
       });
 
+      $scope.visibility = {
+        post: false,
+        plusButton: true,
+        contributionDetails: 'hidden',
+        postSearch: true,
+        postContribute: false
+      };
+
       $scope.query = 'sky';
 
       $scope.search = function () {
@@ -108,6 +121,8 @@ import Embryo from './embryo.es6';
       $scope.select = function (item) {
         $scope.selectedItem = item;
         $scope.url = item.link;
+        $scope.visibility.postSearch = false;
+        $scope.visibility.postContribute = true;
       };
       $scope.submit = function () {
         contributes.submit({ text: $scope.text, url: $scope.url }, function(data) {
@@ -116,10 +131,18 @@ import Embryo from './embryo.es6';
           $scope.contributions.push(data);
           embryo.addContribution(data);
         });
+        $scope.visibility.postSearch = ture;
+        $scope.visibility.postContribute = false;
       };
       $scope.closeLightbox = function () {
         $scope.hasSelected = false;
       };
+      $scope.togglePostPane = function () {
+        $scope.visibility.post = !$scope.visibility.post;
+      };
+      $scope.toggleContributionDetails = function () {
+        $scope.visibility.contributionDetails = $scope.visibility.contributionDetails == 'opened' ? 'shown' : 'opened';
+      }
     }]);
 
 })();

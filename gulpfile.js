@@ -50,7 +50,7 @@ gulp.task('sass', function () {
 gulp.task('watch', ['sass', 'browserify'], function () {
     console.log('watch');
     gulp.watch(['./source/javascripts/*.es6'], ['browserify']);
-    gulp.watch(['./source/sass/*.scss'], ['sass']);
+    gulp.watch(['./source/stylesheets/*.scss'], ['sass']);
 });
 
-gulp.task('default', ['sass', 'browserify']);
+gulp.task('default', ['sass', 'browserify', 'watch']);
