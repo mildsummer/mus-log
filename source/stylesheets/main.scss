@@ -126,12 +126,16 @@ header {
       position: absolute;
       width: 100%;
       transition: left 0.3s ease;
+      margin-top: 40px;
       form {
         width: 620px;
         display: block;
         margin: 0 auto;
         img {
           width: 100%;
+        }
+        span {
+          font-size: 10pt;
         }
         textarea.text {
           width: 620px;
@@ -142,8 +146,25 @@ header {
           outline: none;
         }
         input.button {
-
+          background: none;
+          border: none;
+          text-decoration: underline;
+          display: block;
+          margin: 0 auto;
+          font-size: 18px;
         }
+      }
+      button {
+        display: block;
+        margin: 0 auto;
+        border-left: solid 2px;
+        border-bottom: solid 2px;
+        background: none;
+        border-right: none;
+        border-top: none;
+        width: 20px;
+        height: 20px;
+        transform: rotate(45deg);
       }
     }
     .embryo-post-contribute.hidden {

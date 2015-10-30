@@ -146,6 +146,7 @@ import Embryo from './embryo.es6';
         $scope.url = item.link;
         $scope.visibility.postSearch = false;
         $scope.visibility.postContribute = true;
+        $scope.text = $scope.query;
       };
       $scope.submit = function () {
         contributes.submit({text: $scope.text, url: $scope.url}, function (data) {
