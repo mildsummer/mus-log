@@ -17,7 +17,7 @@ import Embryo from './embryo.es6';
         })
           .success(function (data, status, headers, config) {
             items.concat(data.items);
-            console.log(data);
+            console.log(data.items);
             if(items.length === 20) {
               callback(items);
             }
@@ -34,7 +34,7 @@ import Embryo from './embryo.es6';
         })
           .success(function (data, status, headers, config) {
             items.concat(data.items);
-            console.log(data);
+            console.log(items);
             if(items.length === 20) {
               callback(items);
             }
