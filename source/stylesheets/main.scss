@@ -12,7 +12,7 @@ body {
   margin: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  //overflow: hidden;
   font-family: 'Playfair Display', serif;
 }
 
@@ -124,6 +124,7 @@ header {
       left: -100%;
     }
     .embryo-post-contribute {
+      left: 0;
       position: absolute;
       width: 100%;
       transition: left 0.3s ease;
@@ -135,6 +136,8 @@ header {
         img {
           max-height: 400px;
           max-width: 100%;
+          display: block;
+          margin: 0 auto;
         }
         span {
           font-size: 10pt;
@@ -170,6 +173,11 @@ header {
         width: 20px;
         height: 20px;
         transform: rotate(45deg);
+        float: left;
+        position: absolute;
+        top: 50%;
+        margin-top: -14px;
+        left: 15%;
       }
     }
     .embryo-post-contribute.hidden {

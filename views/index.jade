@@ -3,7 +3,8 @@ extends layout
 block content
   div.container
     header
-      h1 Embryo
+      h1
+        img(src='images/logo_lbk.png')
       h2= session.user.displayName
     div(class="embryo" ng-app="embryo" ng-controller="myCtrl")
       //div.list
