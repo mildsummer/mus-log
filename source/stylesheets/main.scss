@@ -8,6 +8,7 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  font-family: 'Playfair Display', serif;
 }
 
 header {
@@ -62,12 +63,44 @@ header {
     height: 100%;
     position: absolute;
     z-index: 1;
-    background-color: #FFF;
+    background-color: rgba(255,255,255,0.9);
     transition: all 0.3s ease;
     .embryo-post-search {
       position: absolute;
       left: 0;
       transition: left 0.3s ease;
+      width: 100%;
+      margin-top: 40px;
+      .embryo-post-search-form {
+        input.text {
+          background: none;
+          border: none;
+          border-bottom: solid 1px;
+          width: 460px;
+          font-size: 21pt;
+          display: block;
+          margin: 0 auto;
+          outline: none;
+        }
+        input.button {
+          background: none;
+          border: none;
+          text-decoration: underline;
+        }
+      }
+      .embryo-post-search-results {
+        ul.items {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: initial;
+          list-style: none;
+          padding: 0;
+          position: relative;
+          left: 50%;
+          margin-left: -320px;
+          width: 640px;
+        }
+      }
     }
     .embryo-post-search.hidden {
       left: -100%;
