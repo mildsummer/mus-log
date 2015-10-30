@@ -3,9 +3,9 @@ extends layout
 block content
   div.container
     header
-      h1
+      h1.logo
         img(src='images/logo_blk.png')
-      h2= session.user.displayName
+      h2.user-name= session.user.displayName
     div(class="embryo" ng-app="embryo" ng-controller="myCtrl")
       //div.list
       //  div.contribution(ng-repeat='contribution in contributions')

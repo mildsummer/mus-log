@@ -20,6 +20,17 @@ body {
 header {
   position: absolute;
   z-index: 1;
+  margin: 20px 30px;
+  h1.logo {
+    img {
+      width: 137px;
+      height: 40px;
+    }
+    margin: 10px 0;
+  }
+  h2.user-name {
+    font-size: 10pt;
+  }
 }
 
 .container {
