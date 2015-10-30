@@ -16,9 +16,7 @@ import Embryo from './embryo.es6';
           method: 'GET'
         })
           .success(function (data, status, headers, config) {
-            if(items.length === 20) {
-              callback(data.items);
-            }
+            callback(data.items);
           })
 
           .error(function (data, status, headers, config) {
@@ -31,9 +29,7 @@ import Embryo from './embryo.es6';
           method: 'GET'
         })
           .success(function (data, status, headers, config) {
-            if(items.length === 20) {
-              callback(data.items);
-            }
+            callback(data.items);
           })
 
           .error(function (data, status, headers, config) {
