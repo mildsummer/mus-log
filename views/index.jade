@@ -26,8 +26,9 @@ block content
         div(class='embryo-post-contribute {{visibility.postContribute ? "shown" : "hidden"}}')
           form(method="POST" action="./contributes/post")
             img(class='embryo-post-image' ng-src='{{selectedItem.link}}')
-            input(type="text" ng-model="text" value="テキスト")
-            input(type="button" ng-click='submit()' value="送信")
+            span memo:
+            textarea(ng-model="text") {{text}}
+            input(type="button" ng-click='submit()' value="Upload")
           div(class='back' ng-click='backToSearch()') 戻る
       div(class='embryo-contribution {{hasSelected ? "shown" : "hidden"}}')
         div(class='embryo-contribution-details {{visibility.contributionDetails}}' ng-click='toggleContributionDetails()')

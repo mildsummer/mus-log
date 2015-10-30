@@ -124,6 +124,19 @@ header {
       position: absolute;
       left: 0;
       transition: left 0.3s ease;
+      form {
+        width: 620px;
+        display: block;
+        margin: 0 auto;
+        img {
+          width: 100%;
+        }
+        .text {
+          width: 620px;
+          display: block;
+          margin: 0 auto;
+        }
+      }
     }
     .embryo-post-contribute.hidden {
       left: 100%;
