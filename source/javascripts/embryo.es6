@@ -89,7 +89,7 @@ class Embryo {
 
   }
 
-  create() {
+  create(callback) {
     this.geometry = Embryo.createGeometry(100, this.data.length);
     this.frames = Embryo.createFrames(this.geometry, this.data);
     this.frames.children.forEach((frame) => {//マウスイベントの設定
@@ -103,6 +103,7 @@ class Embryo {
       //};
     });
     this.scene.add(this.frames);
+    typeof callback === 'function' && callback();
 
     return this;
   }
@@ -227,12 +228,12 @@ class Embryo {
     contributionの追加
     @param contribution {Object} 投稿
    */
-  addContribution(contribution) {
+  addContribution(contribution, callback) {
     var image = new Image();
     image.onload = () => {
       contribution.texture = Embryo.createTexture(image);
       this.data.push(contribution);
-      this.clear().create();//リセット
+      this.clear().create(callback);//リセット
     };
     image.src = contribution.base64;
 

@@ -106,7 +106,8 @@ import Embryo from './embryo.es6';
         plusButton: true,
         contributionDetails: 'hidden',
         postSearch: true,
-        postContribute: false
+        postContribute: false,
+        postLoading: false
       };
 
       $scope.query = 'sky';
@@ -129,10 +130,13 @@ import Embryo from './embryo.es6';
           console.log(data);
           //投稿の追加
           $scope.contributions.push(data);
-          embryo.addContribution(data);
+          embryo.addContribution(data, function() {
+            $scope.visibility.post = false;
+            $scope.visibility.postSearch = true;
+            $scope.visibility.postContribute = false;
+          });
         });
-        $scope.visibility.postSearch = true;
-        $scope.visibility.postContribute = false;
+        $scope.visibility.postLoading = true;
       };
       $scope.closeLightbox = function () {
         $scope.hasSelected = false;
