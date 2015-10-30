@@ -114,6 +114,8 @@ header {
         li.item {
           margin-right: 10px;
           margin-bottom: 10px;
+          width: 150px;
+          text-align: center;
         }
       }
     }
@@ -122,7 +124,7 @@ header {
     }
     .embryo-post-contribute {
       position: absolute;
-      left: 0;
+      width: 100%;
       transition: left 0.3s ease;
       form {
         width: 620px;
@@ -133,8 +135,10 @@ header {
         }
         .text {
           width: 620px;
+          height: 100px;
           display: block;
           margin: 0 auto;
+          border: none;
         }
       }
     }
