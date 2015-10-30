@@ -133,12 +133,16 @@ header {
         img {
           width: 100%;
         }
-        .text {
+        textarea.text {
           width: 620px;
           height: 100px;
           display: block;
           margin: 0 auto;
           border: none;
+          outline: none;
+        }
+        input.button {
+
         }
       }
     }
