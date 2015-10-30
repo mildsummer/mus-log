@@ -8,6 +8,7 @@ import Embryo from './embryo.es6';
   angular.module('myServices', [])
     .service('imageSearch', ['$http', function ($http) {
       this.getImages = function (query, callback) {
+        var items = [];
         var url = 'https://www.googleapis.com/customsearch/v1?key=AIzaSyCLRfeuR06RNPKbwFgoOnY0ze0IKESF7Kw&cx=001556568943546838350:0bdigrd1x8i&searchType=image&q=';
         query = encodeURIComponent(query.replace(/\s+/g, ' '));
         $http({
@@ -15,7 +16,26 @@ import Embryo from './embryo.es6';
           method: 'GET'
         })
           .success(function (data, status, headers, config) {
-            callback(data);
+            items.concat([data.items]);
+            if(items.length === 20) {
+              callback(items);
+            }
+          })
+
+          .error(function (data, status, headers, config) {
+            alert(status + ' ' + data.message);
+          });
+        url = 'https://www.googleapis.com/customsearch/v1?key=AIzaSyCLRfeuR06RNPKbwFgoOnY0ze0IKESF7Kw&cx=001556568943546838350:0bdigrd1x8i&searchType=image&startIndex=11&q=';
+        query = encodeURIComponent(query.replace(/\s+/g, ' '));
+        $http({
+          url: url + query,
+          method: 'GET'
+        })
+          .success(function (data, status, headers, config) {
+            items.concat([data.items]);
+            if(items.length === 20) {
+              callback(items);
+            }
           })
 
           .error(function (data, status, headers, config) {
@@ -31,7 +51,7 @@ import Embryo from './embryo.es6';
           method: 'GET'
         })
           .success(function (data, status, headers, config) {
-            if(typeof data === 'string') {
+            if (typeof data === 'string') {
               alert(data);
             } else {
               callback(data)
@@ -49,7 +69,7 @@ import Embryo from './embryo.es6';
           data: contribution
         })
           .success(function (data, status, headers, config) {
-            if(typeof data === 'string') {
+            if (typeof data === 'string') {
               alert(data);
             } else {
               callback(data)
@@ -65,13 +85,13 @@ import Embryo from './embryo.es6';
   angular.module("embryo", ['myServices'])
     .controller('myCtrl', ['$scope', 'imageSearch', 'contributes', function ($scope, imageSearch, contributes) {
       //contibutionsを取得
-      contributes.getAll(function(data) {
+      contributes.getAll(function (data) {
         $scope.contributions = data;
         var container = $('.embryo-three');
         var contributionImage = $('.embryo-contribution-image');
         embryo = new Embryo(data, container.get(0), container.width(), container.height());
         window.embryo = embryo;
-        embryo.onselect = function(contribution) {
+        embryo.onselect = function (contribution) {
           if ($scope.hasSelected) {
             $scope.hasSelected = false;
             $scope.visibility.contributionDetails = 'hidden';
@@ -114,9 +134,9 @@ import Embryo from './embryo.es6';
 
       $scope.search = function () {
         $scope.items = [];
-        imageSearch.getImages($scope.query, function (res) {
+        imageSearch.getImages($scope.query, function (items) {
           console.log(res);
-          $scope.items = res.items;
+          $scope.items = items;
         });
       };
       $scope.select = function (item) {
@@ -126,11 +146,11 @@ import Embryo from './embryo.es6';
         $scope.visibility.postContribute = true;
       };
       $scope.submit = function () {
-        contributes.submit({ text: $scope.text, url: $scope.url }, function(data) {
+        contributes.submit({text: $scope.text, url: $scope.url}, function (data) {
           console.log(data);
           //投稿の追加
           $scope.contributions.push(data);
-          embryo.addContribution(data, function() {
+          embryo.addContribution(data, function () {
             $scope.visibility.post = false;
             $scope.visibility.postSearch = true;
             $scope.visibility.postContribute = false;

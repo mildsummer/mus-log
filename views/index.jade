@@ -25,7 +25,7 @@ block content
                 img(ng-src='{{item.image.thumbnailLink}}' width='{{item.image.thumbnailWidth}}' height='{{item.image.thumbnailHeight}}' ng-click='select(item)')
         div(class='embryo-post-contribute {{visibility.postContribute ? "shown" : "hidden"}}')
           form(method="POST" action="./contributes/post")
-            img(class='embryo-post-image' src='selectedItem.link')
+            img(class='embryo-post-image' src='{{selectedItem.link}}')
             input(type="text" ng-model="text" value="テキスト")
             input(type="button" ng-click='submit()' value="送信")
           div(class='back' ng-click='backToSearch()') 戻る

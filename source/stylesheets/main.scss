@@ -72,6 +72,10 @@ header {
       width: 100%;
       margin-top: 40px;
       .embryo-post-search-form {
+        width: 490px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 50px;
         input.text {
           background: none;
           border: none;
@@ -86,6 +90,8 @@ header {
           background: none;
           border: none;
           text-decoration: underline;
+          margin-top: 10px;
+          float: right;
         }
       }
       .embryo-post-search-results {
