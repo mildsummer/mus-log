@@ -17,6 +17,7 @@ import Embryo from './embryo.es6';
         })
           .success(function (data, status, headers, config) {
             items.concat([data.items]);
+            console.log(items);
             if(items.length === 20) {
               callback(items);
             }
@@ -33,6 +34,7 @@ import Embryo from './embryo.es6';
         })
           .success(function (data, status, headers, config) {
             items.concat([data.items]);
+            console.log(items);
             if(items.length === 20) {
               callback(items);
             }
@@ -135,7 +137,7 @@ import Embryo from './embryo.es6';
       $scope.search = function () {
         $scope.items = [];
         imageSearch.getImages($scope.query, function (items) {
-          console.log(res);
+          console.log(items);
           $scope.items = items;
         });
       };
