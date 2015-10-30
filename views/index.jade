@@ -21,7 +21,7 @@ block content
             input(class='button' type='button' ng-click='search()' value='Search')
           div.embryo-post-search-results
             ul(class='items')
-              li(ng-repeat='item in items')
+              li(class='item' ng-repeat='item in items')
                 img(ng-src='{{item.image.thumbnailLink}}' width='{{item.image.thumbnailWidth}}' height='{{item.image.thumbnailHeight}}' ng-click='select(item)')
         div(class='embryo-post-contribute {{visibility.postContribute ? "shown" : "hidden"}}')
           form(method="POST" action="./contributes/post")
