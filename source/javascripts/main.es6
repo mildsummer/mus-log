@@ -16,10 +16,8 @@ import Embryo from './embryo.es6';
           method: 'GET'
         })
           .success(function (data, status, headers, config) {
-            items.concat(data.items);
-            console.log(data.items);
             if(items.length === 20) {
-              callback(items);
+              callback(data.items);
             }
           })
 
@@ -33,10 +31,8 @@ import Embryo from './embryo.es6';
           method: 'GET'
         })
           .success(function (data, status, headers, config) {
-            items.concat(data.items);
-            console.log(items);
             if(items.length === 20) {
-              callback(items);
+              callback(data.items);
             }
           })
 
@@ -132,13 +128,15 @@ import Embryo from './embryo.es6';
         postLoading: false
       };
 
+      $scope.items = [];
+
       $scope.query = 'sky';
 
       $scope.search = function () {
         $scope.items = [];
         imageSearch.getImages($scope.query, function (items) {
           console.log(items);
-          $scope.items = items;
+          $scope.items.concat(items);
         });
       };
       $scope.select = function (item) {
