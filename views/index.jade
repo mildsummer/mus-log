@@ -29,7 +29,7 @@ block content
             span memo:
             textarea(ng-model='text' class='text') {{text}}
             input(type='button' class='button' ng-click='submit()' value='Upload')
-          div(class='back' ng-click='backToSearch()')
+          button(class='back' ng-click='backToSearch()')
       div(class='embryo-contribution {{hasSelected ? "shown" : "hidden"}}')
         div(class='embryo-contribution-details {{visibility.contributionDetails}}' ng-click='toggleContributionDetails()')
           p {{selectedContribution.text}}
