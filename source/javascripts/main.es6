@@ -137,6 +137,7 @@ import Embryo from './embryo.es6';
         imageSearch.getImages($scope.query, function (items) {
           console.log(items);
           $scope.items.concat(items);
+          $scope.$apply();
         });
       };
       $scope.select = function (item) {
