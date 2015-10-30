@@ -133,14 +133,15 @@ header {
         display: block;
         margin: 0 auto;
         img {
-          width: 100%;
+          max-height: 400px;
+          max-width: 100%;
         }
         span {
           font-size: 10pt;
         }
         textarea.text {
-          //width: 620px;
-          height: 400px;
+          width: 620px;
+          height: 60px;
           display: block;
           margin: 0 auto;
           border: none;
