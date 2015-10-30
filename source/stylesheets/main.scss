@@ -25,7 +25,7 @@ header {
       width: 137px;
       height: 40px;
     }
-    margin: 10px 0;
+    margin: 10px -1px;
   }
   h2.user-name {
     font-size: 10pt;
@@ -80,7 +80,7 @@ header {
     position: absolute;
     z-index: 1;
     background-color: rgba(255,255,255,0.9);
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     transition: all 0.3s ease;
     .embryo-post-search {
