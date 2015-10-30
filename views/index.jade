@@ -32,7 +32,7 @@ block content
             input(type="button" ng-click='submit()' value="送信")
           div(class='back' ng-click='backToSearch()') 戻る
       div(class='embryo-contribution {{hasSelected ? "shown" : "hidden"}}')
-        div(class='embryo-contribution-details {{visibility.contributionDetails ? "shown" : "hidden"}}' ng-click'toggleContributionDetails()')
+        div(class='embryo-contribution-details {{visibility.contributionDetails ? "shown" : "hidden"}}' ng-click='toggleContributionDetails()')
           p {{selectedContribution.text}}
           //img(ng-src='{{selectedContribution.base64}}')
           //input(type='button' ng-click='closeLightbox()' value='close')
