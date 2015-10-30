@@ -139,12 +139,16 @@ header {
           font-size: 10pt;
         }
         textarea.text {
-          width: 620px;
-          height: 100px;
+          //width: 620px;
+          height: 400px;
           display: block;
           margin: 0 auto;
           border: none;
           outline: none;
+          color: #CCC;
+        }
+        textarea.text:focus {
+          color: #000;
         }
         input.button {
           background: none;
@@ -152,7 +156,6 @@ header {
           text-decoration: underline;
           display: block;
           margin: 0 auto;
-          font-size: 18px;
         }
       }
       button {
