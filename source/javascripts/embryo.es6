@@ -194,10 +194,10 @@ class Embryo {
 
   moveVertices() {
     //console.log(this.frames.children[0].geometry.vertices[0]);
-    this.frames.children.forEach(function(frame) {
+    this.frames.children.forEach((frame) => {
       var face = frame.geometry.faces[0];
-      frame.geometry.vertices.forEach(function(vertex) {
-        vertex.mix(face.normal, 0.1).setLength(vertex.originalLength);
+      frame.geometry.vertices.forEach((vertex) => {
+        vertex.mix(face.normal, 0.1).setLength(vertex.originalLength + 5 * Math.cos(this.count/100));
     });
       frame.geometry.verticesNeedUpdate = true;
       frame.geometry.computeFaceNormals();
