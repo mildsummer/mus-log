@@ -33,14 +33,21 @@ header {
 }
 
 .login {
-  margin: 0 auto;
-  text-align: center;
-  h1.logo {
-    img {
-      width: 137px;
-      height: 40px;
+  display: table;
+  width: 100%;
+  height: 100%;
+  .container {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    h1.logo {
+      img {
+        width: 137px;
+        height: 40px;
+      }
+      margin: 10px -1px;
     }
-    margin: 10px -1px;
+    font-size: 10pt;
   }
 }
 
