@@ -197,7 +197,7 @@ class Embryo {
     this.frames.children.forEach((frame) => {
       var face = frame.geometry.faces[0];
       frame.geometry.vertices.forEach((vertex, index) => {
-        vertex.mix(face.normal, 0.1).setLength(vertex.originalLength + 5 * Math.cos(this.count/10 + index * 10));
+        vertex.mix(face.normal, 0.1).setLength(vertex.originalLength + 5 * Math.cos(this.count/20 + index * 10));
     });
       frame.geometry.verticesNeedUpdate = true;
       frame.geometry.computeFaceNormals();
