@@ -253,14 +253,15 @@ class Embryo {
     var START_POINT = this.frames.position.clone;
     var END_POINT = this.isHidden ? new THREE.Vector3() : new THREE.Vector3(0, -200, -200);
     var count = 0;
-    (() => {
+    var animate = () => {
       var n = count / TOTAL_COUNT;
       this.frames.position.set(START_POINT.mix(END_POINT, n));
       if(count < TOTAL_COUNT) {
         count++;
-        window.requestAnimateionFrame(arguments.callee);
+        window.requestAnimateionFrame(animate);
       }
-    })();
+    }
+    window.requestAnimationFrame(animate);
     this.isHidden = !this.isHidden;
   }
 
