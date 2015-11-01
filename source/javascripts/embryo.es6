@@ -250,7 +250,7 @@ class Embryo {
     
   toggle() {
     var TOTAL_COUNT = 36;
-    var START_POINT = this.frames.position.clone;
+    var START_POINT = this.frames.position.clone();
     var END_POINT = this.isHidden ? new THREE.Vector3() : new THREE.Vector3(0, -200, -200);
     var count = 0;
     var animate = () => {
