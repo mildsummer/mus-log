@@ -105,6 +105,7 @@ import Embryo from './embryo.es6';
             contributionImage.css({
               'opacity': 0
             });
+            embryo.toggle();
           } else {
             $scope.hasSelected = true;
             $scope.visibility.contributionDetails = 'shown';
