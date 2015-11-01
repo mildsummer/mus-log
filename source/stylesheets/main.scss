@@ -47,8 +47,14 @@ header {
       }
       margin: 10px -1px;
     }
-    h2 {
+    a.login-button {
       font-size: 10pt;
+      display: inline-block;
+      color: #3498db;
+      text-decoration: none;
+      border: 1px solid #eee;
+      padding: 10px 40px;
+      position: relative;
     }
   }
 }
@@ -260,4 +266,58 @@ header {
   .embryo-three.hidden {
 
   }
+}
+
+.change-border::after,
+.change-border::before,
+.change-border__inner::after,
+.change-border__inner::before {
+    background-color: #3498db;
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 10;
+    transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+}
+
+.change-border::after {
+    height: 1px;
+    left: -1px;
+    top: -1px;
+    width: 0px;
+}
+
+.change-border::before {
+    bottom: -1px;
+    height: 1px;
+    right: -1px;
+    width: 0px;
+}
+
+.change-border__inner::after {
+    bottom: -1px;
+    height: 0px;
+    left: -1px;
+    width: 1px;
+}
+
+.change-border__inner::before {
+    height: 0px;
+    right: -1px;
+    top: -1px;
+    width: 1px;
+}
+
+/* hover */
+.change-border:hover::after,
+.change-border:hover::before {
+    width: 100%;
+    width: calc(100% + 1px);
+}
+
+.change-border:hover .change-border__inner::after,
+.change-border:hover .change-border__inner::before {
+    height: 100%;
+    height: calc(100% + 1px);
 }
