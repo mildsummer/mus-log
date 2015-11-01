@@ -49,12 +49,20 @@ header {
     }
     a.change-border {
       font-size: 10pt;
+      font-weight: 400;
       display: inline-block;
-      color: #3498db;
+      color: #55acee;
       text-decoration: none;
-      border: 1px solid #eee;
       padding: 10px 40px;
       position: relative;
+      h2.change-border__inner {
+        margin: 0;
+        img {
+          width: 20px;
+          height: 16px;
+          margin-right: 10px;
+        }
+      }
     }
   }
 }
@@ -272,7 +280,7 @@ header {
 .change-border::before,
 .change-border__inner::after,
 .change-border__inner::before {
-    background-color: #3498db;
+    background-color: #55acee;
     content: '';
     display: block;
     position: absolute;
