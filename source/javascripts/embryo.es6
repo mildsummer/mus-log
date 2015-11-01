@@ -256,10 +256,11 @@ class Embryo {
     console.log(START_POINT);
     var animate = () => {
       var n = count / TOTAL_COUNT;
-      this.frames.position.set(START_POINT.mix(END_POINT, n));
+      var newPoint = START_POINT.clone().mix(END_POINT, n);
+      this.frames.position.set(newPoint.x, newPoint.y, newPoint.z);
       if(count < TOTAL_COUNT) {
         count++;
-        window.requestAnimateionFrame(animate);
+        window.requestAnimationFrame(animate);
       }
     }
     window.requestAnimationFrame(animate);
