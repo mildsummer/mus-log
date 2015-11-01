@@ -39,6 +39,7 @@ class Embryo {
   initialize(container, width, height) {
     this.width = width;
     this.height = height;
+    this.isHidden = false;
 
     //init scene
     var scene = new THREE.Scene();
@@ -245,6 +246,22 @@ class Embryo {
     this.camera.aspect = width / height;
     this.camera.updateProjectionMatrix();
     return this;
+  }
+    
+  toggle() {
+    var TOTAL_COUNT = 36;
+    var START_POINT = this.frames.position.clone;
+    var END_POINT = this.isHidden ? new THREE.Vector3() : new THREE.Vector3(0, -200, -200);
+    var count = 0;
+    (() => {
+      var n = count / TOTAL_COUNT;
+      this.frames.position.set(START_POINT.mix(END_POINT, n));
+      if(count < TOTAL_COUNT) {
+        count++;
+        window.requestAnimateionFrame(arguments.callee);
+      }
+    })();
+    this.isHidden = !this.isHidden;
   }
 
 }
