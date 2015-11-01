@@ -401,7 +401,7 @@ var Embryo = (function () {
       console.log(START_POINT);
       var animate = function animate() {
         var n = count / TOTAL_COUNT - 1;
-        var newPoint = START_POINT.clone().mix(END_POINT, Math.pow(n, 5));
+        var newPoint = START_POINT.clone().mix(END_POINT, Math.pow(n, 5) + 1);
         _this5.frames.position.set(newPoint.x, newPoint.y, newPoint.z);
         if (count < TOTAL_COUNT) {
           count++;
