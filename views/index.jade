@@ -34,9 +34,10 @@ block content
       div(class='embryo-contribution {{hasSelected ? "shown" : "hidden"}}')
         div(class='embryo-contribution-details {{visibility.contributionDetails}}')
           div(class='toggle-button' ng-click='toggleContributionDetails()')
-          textarea(ng-model='selectedContributionText' class='text') {{selectedContributionText}}
-          input(type='button' class='button' ng-click='editText()' value='OK')
-          span.message {{contributionDetailsMessage}}
+          form.embryo-contribution-details-form
+            textarea(ng-model='selectedContributionText' class='text') {{selectedContributionText}}
+            a(class='button change-border' ng-click='editText()')
+              span.change-border__inner {{contributionDetailsMessage}}
           //img(ng-src='{{selectedContribution.base64}}')
           //input(type='button' ng-click='closeLightbox()' value='close')
         div.embryo-contribution-image

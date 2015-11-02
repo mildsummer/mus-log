@@ -1,4 +1,4 @@
-input, button {
+input, button, textarea {
   font-family: 'Playfair Display',serif;
   outline: none;
 }
@@ -48,13 +48,6 @@ header {
       margin: 10px -1px;
     }
     a.change-border {
-      font-size: 10pt;
-      font-weight: 400;
-      display: inline-block;
-      color: #55acee;
-      text-decoration: none;
-      padding: 10px 40px;
-      position: relative;
       h2.change-border__inner {
         margin: 0;
         img {
@@ -252,12 +245,23 @@ header {
         height: 100%;
         float: left;
       }
+      .embryo-contribution-details-form {
+        width: calc(100% - 60px);
+        height: 100%;
+        margin: 30px;
+        textarea {
+          height: 46px;
+          width: 100%;
+          border: none;
+          padding: 0;
+        }
+      }
     }
     .embryo-contribution-details.shown {
       margin-left: -30px;
     }
     .embryo-contribution-details.opened {
-      margin-left: -300px;
+      margin-left: -30%;
     }
     .embryo-contribution-image {
       width: 100%;
@@ -278,6 +282,16 @@ header {
   .embryo-three.hidden {
 
   }
+}
+
+.change-border {
+  font-size: 10pt;
+  font-weight: 400;
+  display: inline-block;
+  color: #55acee;
+  text-decoration: none;
+  padding: 10px 40px;
+  position: relative;
 }
 
 .change-border::after,
