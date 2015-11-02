@@ -89,8 +89,8 @@ header {
     height: 100%;
     position: absolute;
     color: #999;
-    display: table;
     z-index: 2;
+    display: none;
     .tutorial-arrow {
         width: 60px;
         height: 10px;
@@ -130,8 +130,8 @@ header {
         }
     }
   }
-  .tutorial.hidden {
-      display: none;
+  .tutorial.shown {
+      display: table;
   }
   .plus-button {
     margin: 30px;
