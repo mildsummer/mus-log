@@ -41,7 +41,7 @@ block content
           //img(ng-src='{{selectedContribution.base64}}')
           //input(type='button' ng-click='closeLightbox()' value='close')
         div.embryo-contribution-image
-      div.embryo-three
+      div(class='embryo-three {{visibility.three ? "show" : "hidden"}}')
   script(type="text/javascript", src='bower_components/jquery/dist/jquery.js')
   script(type="text/javascript", src='bower_components/angular/angular.js')
   script(type="text/javascript", src='bower_components/threejs/build/three.js')

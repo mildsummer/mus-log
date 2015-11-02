@@ -120,14 +120,10 @@ import Embryo from './embryo.es6';
             $scope.visibility.contributionDetails = 'hidden';
             $scope.visibility.plusButton = true;
             $scope.$apply();
-            container.css({
-              //'-webkit-filter': 'blur(0px)'
-              '-webkit-transform': 'translateY(0)',
-              'transform': 'translateY(0)'
-            });
             contributionImage.css({
               'opacity': 0
             });
+            $scope.visibility.three = true;
             //embryo.toggle();
           } else {
             $scope.hasSelected = true;
@@ -141,11 +137,7 @@ import Embryo from './embryo.es6';
               'backgroundSize': 'cover',
               'opacity': 1
             });
-            container.css({
-              //'-webkit-filter': 'blur(10px)'
-              '-webkit-transform': 'translateY(45%)',
-              'transform': 'translateY(45%)'
-            });
+            $scope.visibility.three = false;
             //embryo.toggle();
           }
         };
@@ -157,7 +149,8 @@ import Embryo from './embryo.es6';
         contributionDetails: 'hidden',
         postSearch: true,
         postContribute: false,
-        postLoading: false
+        postLoading: false,
+        three: true
       };
 
       $scope.query = '';
