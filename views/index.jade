@@ -7,7 +7,7 @@ block content
         img(src='images/logo_blk.png')
       h2.user-name= session.user.displayName
     div(class="embryo" ng-app="embryo" ng-controller="myCtrl")
-      div(class='tutorial {{visibility.tutorial ? "shown" : "hidden"}})
+      div(class='tutorial {{visibility.tutorial ? "shown" : "hidden"}}')
         div.tutorial-arrow
           span.tutorial-arrow-description image search
           div.tutorial-arrow-inner
