@@ -30,7 +30,7 @@ router.get('/', function(req, res, next) {
       } else {
         req.session.user = user;
         res.render('index', {
-          title: 'ユーザー登録済みです',
+          title: passport.user.displayName + ' / mus.log',
           session: passport
         });
       }

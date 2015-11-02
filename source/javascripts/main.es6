@@ -119,7 +119,7 @@ import Embryo from './embryo.es6';
             });
             container.css({
               '-webkit-filter': 'blur(10px)'
-            })
+            });
             embryo.toggle();
           }
         };
