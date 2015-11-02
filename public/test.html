@@ -1,52 +1,77 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>ユーザー登録済みです</title>
     <link rel="stylesheet" href="./stylesheets/main.css">
 </head>
-<body>
-<div class="container">
-    <header><h1>Embryo</h1>
 
-        <h2>mildsummer</h2></header>
-    <div ng-app="embryo" ng-controller="myCtrl" class="embryo"><!--div.list-->
-        <!--  div.contribution(ng-repeat='contribution in contributions')--><!--    p {{contribution.text}}-->
-        <!--    img(ng-src='{{contribution.base64}}')-->
-        <!--img(ng-src='{{selectedItem ? selectedItem.link : null}}' width='{{item.image.width}}' height='{{item.image.height}}')-->
-        <div class="plus-button {{visibility.plusButton ? 'shown' : 'hidden'}} {{visibility.post ? 'close' : 'plus'}}" ng-click="togglePostPane()">
-            <div></div>
-            <div></div>
-        </div>
-        <div class="embryo-post {{visibility.post ? 'shown' : 'hidden'}}"><p><span class="title">Queries:</span><input type="text" ng-model="query"><input
-                type="button" ng-click="search()" value="Search"></p>
-            <div class="embryo-post-search {{visibility.postSearch ? 'shown' : 'hidden'}}">
-                <p><span class="title">Results: {{ items.length }}</span>
-                <ul class="items">
-                    <li ng-repeat="item in items"><img ng-src="{{item.image.thumbnailLink}}"
-                                                       width="{{item.image.thumbnailWidth}}"
-                                                       height="{{item.image.thumbnailHeight}}" ng-click="select(item)"></li>
-                </ul>
+<body>
+    <div class="container">
+        <header>
+            <h1>Embryo</h1>
+
+            <h2>mildsummer</h2>
+        </header>
+        <div ng-app="embryo" ng-controller="myCtrl" class="embryo">
+            <!--div.list-->
+            <!--  div.contribution(ng-repeat='contribution in contributions')-->
+            <!--    p {{contribution.text}}-->
+            <!--    img(ng-src='{{contribution.base64}}')-->
+            <!--img(ng-src='{{selectedItem ? selectedItem.link : null}}' width='{{item.image.width}}' height='{{item.image.height}}')-->
+            <div class='tutorial'>
+                <div class='tutorial-arrow'>
+                    <span class='tutorial-arrow-description'>image search</span>
+                    <div class='tutorial-arrow-inner'></div>
+                </div>
+                <div class='tutorial-message'>
+                    <h2>0</h2>
+                    <p>まだログがありません。<br />右上の「＋」ボタンから<br />追加したい作品を検索してください。</p>
+                </div>
+            </div>
+            <div class="plus-button {{visibility.plusButton ? 'shown' : 'hidden'}} {{visibility.post ? 'close' : 'plus'}}" ng-click="togglePostPane()">
+                <div></div>
+                <div></div>
+            </div>
+            <div class="embryo-post {{visibility.post ? 'shown' : 'hidden'}}">
+                <p><span class="title">Queries:</span>
+                    <input type="text" ng-model="query">
+                    <input type="button" ng-click="search()" value="Search">
                 </p>
+                <div class="embryo-post-search {{visibility.postSearch ? 'shown' : 'hidden'}}">
+                    <p><span class="title">Results: {{ items.length }}</span>
+                        <ul class="items">
+                            <li ng-repeat="item in items">
+                                <img ng-src="{{item.image.thumbnailLink}}" width="{{item.image.thumbnailWidth}}" height="{{item.image.thumbnailHeight}}" ng-click="select(item)">
+                            </li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="embryo-post-contribute {{visibility.postContribute ? 'shown' : 'hidden'}}">
+                    <form method="POST" action="./contributes/post">
+                        <input type="text" ng-model="text" value="テキスト">
+                        <input type="text" ng-model="url" value="画像URL">
+                        <input type="button" ng-click="submit()" value="送信">
+                    </form>
+                </div>
             </div>
-            <div class="embryo-post-contribute {{visibility.postContribute ? 'shown' : 'hidden'}}">
-                <form method="POST" action="./contributes/post"><input type="text" ng-model="text" value="テキスト"><input
-                        type="text" ng-model="url" value="画像URL"><input type="button" ng-click="submit()" value="送信"></form>
+            <div class="embryo-contribution {{hasSelected ? &quot;shown&quot; : &quot;hidden&quot;}}">
+                <div class="embryo-contribution-details {{visibility.contributionDetails}}" ng-click="toggleContributionDetails()">
+                    <p>{{selectedContribution.text}}</p>
+                    <!--img(ng-src='{{selectedContribution.base64}}')-->
+                    <!--input(type='button' ng-click='closeLightbox()' value='close')-->
+                </div>
+                <div class="embryo-contribution-image"></div>
             </div>
+            <div class="embryo-three"></div>
         </div>
-        <div class="embryo-contribution {{hasSelected ? &quot;shown&quot; : &quot;hidden&quot;}}">
-            <div class="embryo-contribution-details {{visibility.contributionDetails}}" ng-click="toggleContributionDetails()"><p>{{selectedContribution.text}}</p>
-                <!--img(ng-src='{{selectedContribution.base64}}')-->
-                <!--input(type='button' ng-click='closeLightbox()' value='close')--></div>
-            <div class="embryo-contribution-image"></div>
-        </div>
-        <div class="embryo-three"></div>
     </div>
-</div>
-<script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
-<script type="text/javascript" src="bower_components/angular/angular.js"></script>
-<script type="text/javascript" src="bower_components/threejs/build/three.js"></script>
-<script type="text/javascript" src="bower_components/threejs/build/TrackballControls.js"></script>
-<script type="text/javascript" src="javascripts/main.js"></script>
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="bower_components/threejs/build/three.js"></script>
+    <script type="text/javascript" src="bower_components/threejs/build/TrackballControls.js"></script>
+    <script type="text/javascript" src="javascripts/main.js"></script>
 </body>
+
 </html>
