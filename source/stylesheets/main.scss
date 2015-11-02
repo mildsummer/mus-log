@@ -248,6 +248,10 @@ header {
       background-color: #FFF;
       margin-left: 0px;
       padding: 30px;
+      .toggle-button {
+        width: 30px;
+        height: 100%;
+      }
     }
     .embryo-contribution-details.shown {
       margin-left: -30px;
