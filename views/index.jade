@@ -36,6 +36,7 @@ block content
           div(class='toggle-button' ng-click='toggleContributionDetails()')
           textarea(ng-model='selectedContributionText' class='text') {{selectedContributionText}}
           input(type='button' class='button' ng-click='editText()' value='OK')
+          span.message= {{contributionDetailsMessage}}
           //img(ng-src='{{selectedContribution.base64}}')
           //input(type='button' ng-click='closeLightbox()' value='close')
         div.embryo-contribution-image
