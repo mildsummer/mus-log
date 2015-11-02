@@ -119,11 +119,11 @@ import Embryo from './embryo.es6';
             $scope.hasSelected = false;
             $scope.visibility.contributionDetails = 'hidden';
             $scope.visibility.plusButton = true;
+            $scope.visibility.three = false;
             $scope.$apply();
             contributionImage.css({
               'opacity': 0
             });
-            $scope.visibility.three = false;
             //embryo.toggle();
           } else {
             $scope.hasSelected = true;
@@ -131,13 +131,13 @@ import Embryo from './embryo.es6';
             $scope.visibility.plusButton = false;
             $scope.selectedContribution = contribution;
             $scope.selectedContributionText = contribution.text;
+            $scope.visibility.three = false;
             $scope.$apply();
             contributionImage.css({
               'backgroundImage': 'url(' + contribution.base64 + ')',
               'backgroundSize': 'cover',
               'opacity': 1
             });
-            $scope.visibility.three = true;
             //embryo.toggle();
           }
         };
