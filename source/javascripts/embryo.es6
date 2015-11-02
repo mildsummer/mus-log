@@ -93,7 +93,7 @@ class Embryo {
   create(callback) {
     this.geometry = Embryo.createGeometry(100, this.data.length);
     this.frames = Embryo.createFrames(this.geometry, this.data);
-    this.frames.children.forEach((frame) => {//マウスイベントの設定
+    this.frames.children && this.frames.children.forEach((frame) => {//マウスイベントの設定
       frame.onclick = (intersect) => {
         if(typeof this.onselect === 'function') {
           this.onselect(frame.data);
