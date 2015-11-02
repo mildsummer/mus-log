@@ -111,7 +111,7 @@ import Embryo from './embryo.es6';
       //contibutionsを取得
       contributes.getAll(function (data) {
         $scope.contributions = data;
-        $scope.visibility.tutorial = data.length > 0;
+        $scope.visibility.tutorial = data.length < 1;
         var container = $('.embryo-three');
         var contributionImage = $('.embryo-contribution-image');
         embryo = new Embryo(data, container.get(0), container.width(), container.height(), function() {
