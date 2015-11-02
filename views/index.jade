@@ -33,7 +33,8 @@ block content
           button(class='back' ng-click='backToSearch()')
       div(class='embryo-contribution {{hasSelected ? "shown" : "hidden"}}')
         div(class='embryo-contribution-details {{visibility.contributionDetails}}' ng-click='toggleContributionDetails()')
-          p {{selectedContribution.text}}
+          textarea(ng-model='edit_text' class='text') {{selectedContribution.text}}
+          input(type='button' class='button' ng-click='editText()' value='OK')
           //img(ng-src='{{selectedContribution.base64}}')
           //input(type='button' ng-click='closeLightbox()' value='close')
         div.embryo-contribution-image

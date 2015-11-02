@@ -163,6 +163,10 @@ import Embryo from './embryo.es6';
         });
         $scope.visibility.postLoading = true;
       };
+      $scope.editText = function () {
+        console.log($scope.selectedContribution);
+        //contributes.editText({text: $scope.edit_text})
+      };
       $scope.closeLightbox = function () {
         $scope.hasSelected = false;
       };

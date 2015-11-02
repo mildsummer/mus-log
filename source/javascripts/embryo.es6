@@ -216,7 +216,6 @@ class Embryo {
    */
   clear() {
     this.geometry && this.geometry.dispose();
-    this.geometry && this.geometry.dispose();
     this.frames.children.forEach(function(frame) {
       frame.geometry.dispose();
       frame.material.dispose();
