@@ -129,6 +129,9 @@ header {
         }
     }
   }
+  .tutorial.hidden {
+      display: none;
+  }
   .plus-button {
     margin: 30px;
     width: 50px;

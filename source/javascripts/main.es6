@@ -111,6 +111,7 @@ import Embryo from './embryo.es6';
       //contibutionsを取得
       contributes.getAll(function (data) {
         $scope.contributions = data;
+        $scope.visibility.tutorial = data.length > 0;
         var container = $('.embryo-three');
         var contributionImage = $('.embryo-contribution-image');
         embryo = new Embryo(data, container.get(0), container.width(), container.height(), function() {
@@ -155,7 +156,8 @@ import Embryo from './embryo.es6';
         postContribute: false,
         postLoading: false,
         three: true,
-        loading: true
+        loading: true,
+        tutorial: false
       };
 
       $scope.query = '';
@@ -184,6 +186,7 @@ import Embryo from './embryo.es6';
             $scope.visibility.post = false;
             $scope.visibility.postSearch = true;
             $scope.visibility.postContribute = false;
+            $scope.visibility.tutorial = false;
           });
         });
         $scope.visibility.postLoading = true;
