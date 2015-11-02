@@ -82,6 +82,27 @@ import Embryo from './embryo.es6';
             alert(status + ' ' + data.message);
           });
       };
+      this.editText = function (text, contribution_id, callback) {
+        $http({
+          url: '/contributes/edit',
+          method: 'POST',
+          data: {
+            text: text,
+            contribution_id: contribution_id
+          }
+        })
+          .success(function (data, status, headers, config) {
+            if (typeof data === 'string') {
+              alert(data);
+            } else {
+              callback(data)
+            }
+          })
+
+          .error(function (data, status, headers, config) {
+            alert(status + ' ' + data.message);
+          });
+      };
     }]);
 
   angular.module("embryo", ['myServices'])
@@ -111,6 +132,7 @@ import Embryo from './embryo.es6';
             $scope.visibility.contributionDetails = 'shown';
             $scope.visibility.plusButton = false;
             $scope.selectedContribution = contribution;
+            $scope.selectedContributionText = contribution.text;
             $scope.$apply();
             contributionImage.css({
               'backgroundImage': 'url(' + contribution.base64 + ')',
@@ -134,7 +156,8 @@ import Embryo from './embryo.es6';
         postLoading: false
       };
 
-      $scope.query = 'sky';
+      $scope.query = '';
+      $scope.contributionDetailsMessage = '';
 
       $scope.search = function () {
         $scope.items = [];
@@ -164,8 +187,11 @@ import Embryo from './embryo.es6';
         $scope.visibility.postLoading = true;
       };
       $scope.editText = function () {
-        console.log($scope.selectedContribution);
-        //contributes.editText({text: $scope.edit_text})
+        console.log($scope.selectedContributionText);
+        contributes.editText($scope.selectedContributionText, $scope.selectedContribution._id, function() {
+          $scope.contributionDetailsMessage = '更新が完了しました';
+          $scope.$apply();
+        });
       };
       $scope.closeLightbox = function () {
         $scope.hasSelected = false;

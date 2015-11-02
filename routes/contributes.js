@@ -42,6 +42,21 @@ router.post('/post', function(req, res) {
   })
 });
 
+/* edit contribute. */
+router.post('/edit', function(req, res) {
+  console.log(req.body);
+  Contribution.findOne({_id: req.body.contribution_id}).exec(function(err, contribution) {
+    contribution.text = req.body.text;
+    contribution.save(function(err) {
+      if(!err) {
+        res.send(contribution);//投稿完了
+      } else {
+        res.send('データ書き込みエラー');
+      }
+    });
+  });
+});
+
 router.get('/all', function(req, res) {
   Contribution.find({user: req.session.passport.user.id}).exec(function(err, contributions) {
     if(!err) {
