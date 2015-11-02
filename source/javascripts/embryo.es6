@@ -216,10 +216,12 @@ class Embryo {
    */
   clear() {
     this.geometry && this.geometry.dispose();
-    this.frames && this.frames.children.forEach(function(frame) {
+    this.geometry && this.geometry.dispose();
+    this.frames.children.forEach(function(frame) {
       frame.geometry.dispose();
       frame.material.dispose();
-    }) && this.scene.remove(this.frames);
+    });
+    this.scene.remove(this.frames);
 
     return this;
   }
