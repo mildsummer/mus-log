@@ -96,7 +96,7 @@ class Embryo {
     this.frames.children && this.frames.children.forEach((frame) => {//マウスイベントの設定
       frame.onclick = (intersect) => {
         if(typeof this.onselect === 'function') {
-          this.onselect(frame.data);
+          frame.data && this.onselect(frame.data);
         }
       };
       //frame.onmouseover = (intersect) => {
