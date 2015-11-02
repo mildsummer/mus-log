@@ -9,7 +9,7 @@ import Embryo from './embryo.es6';
     .service('imageSearch', ['$http', function ($http) {
       this.getImages = function (query, callback) {
         var items = [];
-        var url = 'https://www.googleapis.com/customsearch/v1?key=AIzaSyCLRfeuR06RNPKbwFgoOnY0ze0IKESF7Kw&cx=001556568943546838350:0bdigrd1x8i&searchType=image&q=';
+        var url = 'https://www.googleapis.com/customsearch/v1?key=AIzaSyD3inAUtfaiIqFbBMOI0Y34X1x_qvsxA8g&cx=001556568943546838350:0bdigrd1x8i&searchType=image&q=';
         query = encodeURIComponent(query.replace(/\s+/g, ' '));
         $http({
           url: url + query,
@@ -26,7 +26,7 @@ import Embryo from './embryo.es6';
           .error(function (data, status, headers, config) {
             alert(status + ' ' + data.message);
           });
-        url = 'https://www.googleapis.com/customsearch/v1?key=AIzaSyCLRfeuR06RNPKbwFgoOnY0ze0IKESF7Kw&cx=001556568943546838350:0bdigrd1x8i&searchType=image&start=11&q=';
+        url = 'https://www.googleapis.com/customsearch/v1?key=AIzaSyD3inAUtfaiIqFbBMOI0Y34X1x_qvsxA8g&cx=001556568943546838350:0bdigrd1x8i&searchType=image&start=11&q=';
         query = encodeURIComponent(query.replace(/\s+/g, ' '));
         $http({
           url: url + query,
@@ -154,7 +154,7 @@ import Embryo from './embryo.es6';
       };
 
       $scope.query = '';
-      $scope.contributionDetailsMessage = 'OK';
+      $scope.contributionDetailsMessage = 'Update';
 
       $scope.search = function () {
         $scope.items = [];
@@ -186,10 +186,10 @@ import Embryo from './embryo.es6';
       $scope.editText = function () {
         console.log($scope.selectedContributionText);
         contributes.editText($scope.selectedContributionText, $scope.selectedContribution._id, function() {
-          $scope.contributionDetailsMessage = '更新が完了しました';
+          $scope.contributionDetailsMessage = 'Completed';
           $scope.$apply();
           window.setTimeout(function() {
-            $scope.contributionDetailsMessage = 'OK';
+            $scope.contributionDetailsMessage = 'Update';
             $scope.$apply();
           }, 2000);
         });
