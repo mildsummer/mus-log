@@ -150,7 +150,8 @@ import Embryo from './embryo.es6';
         postSearch: true,
         postContribute: false,
         postLoading: false,
-        three: true
+        three: true,
+        loading: false
       };
 
       $scope.query = '';

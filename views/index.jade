@@ -12,6 +12,7 @@ block content
       //    p {{contribution.text}}
       //    img(ng-src='{{contribution.base64}}')
       //img(ng-src='{{selectedItem ? selectedItem.link : null}}' width='{{item.image.width}}' height='{{item.image.height}}')
+      div(class='loading {{visibility.loading ? "shown" : "hidden"}}')
       div(class='plus-button {{visibility.plusButton ? "shown" : "hidden"}} {{visibility.post ? "close" : "plus"}}' ng-click="togglePostPane()")
         div
         div
