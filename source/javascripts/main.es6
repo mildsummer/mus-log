@@ -119,7 +119,7 @@ import Embryo from './embryo.es6';
             $scope.hasSelected = false;
             $scope.visibility.contributionDetails = 'hidden';
             $scope.visibility.plusButton = true;
-            $scope.visibility.three = false;
+            $scope.visibility.three = true;
             $scope.$apply();
             contributionImage.css({
               'opacity': 0
