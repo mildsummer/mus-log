@@ -161,7 +161,7 @@ import Embryo from './embryo.es6';
       };
 
       $scope.query = '';
-      $scope.contributionDetailsMessage = '';
+      $scope.contributionDetailsMessage = 'OK';
 
       $scope.search = function () {
         $scope.items = [];
@@ -195,6 +195,10 @@ import Embryo from './embryo.es6';
         contributes.editText($scope.selectedContributionText, $scope.selectedContribution._id, function() {
           $scope.contributionDetailsMessage = '更新が完了しました';
           $scope.$apply();
+          window.setTimeout(function() {
+            $scope.contributionDetailsMessage = 'OK';
+            $scope.$apply();
+          }, 2000);
         });
       };
       $scope.closeLightbox = function () {

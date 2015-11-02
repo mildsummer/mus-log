@@ -250,10 +250,22 @@ header {
         height: 100%;
         margin: 30px;
         textarea {
-          height: 46px;
+          height: 50%;
           width: 100%;
           border: none;
           padding: 0;
+        }
+        a.button {
+          display: block;
+          margin: 0 auto;
+          text-align: center;
+          color: #000;
+          .change-border::after,
+          .change-border::before,
+          .change-border__inner::after,
+          .change-border__inner::before {
+            background-color: #000;
+          }
         }
       }
     }
