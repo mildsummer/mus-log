@@ -104,7 +104,9 @@ class Embryo {
       //};
     });
     this.scene.add(this.frames);
-    typeof callback === 'function' && callback();
+    if(typeof callback === 'function') {
+      callback();
+    }
 
     return this;
   }
