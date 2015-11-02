@@ -7,7 +7,7 @@ THREE.Vector3.prototype.mix = function(y, a) {
 
 class Embryo {
 
-  constructor(data, container, width, height) {
+  constructor(data, container, width, height, callback) {
 
     //* data : array of contributions
     //* contribution
@@ -16,6 +16,7 @@ class Embryo {
     //*   text: String
     //* }
     this.data = data;
+    this.createCallback = callback;
 
     //テクスチャの作成
     var loadedNum = 0;
@@ -70,7 +71,7 @@ class Embryo {
     this.controls = controls;
 
     //生成
-    this.create();
+    this.create(this.createCallback);
 
     this.count = 0;
 
