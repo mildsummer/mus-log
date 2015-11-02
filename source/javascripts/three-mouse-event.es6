@@ -8,6 +8,11 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
   function handleMouseDown(event) {
     event.preventDefault();
 
+    var mouse = new THREE.Vector2();
+    var rect = domElement.getBoundingClientRect();
+    mouse.x = ((event.clientX - rect.left) / domElement.width) * 2 - 1;
+    mouse.y = -((event.clientY - rect.top) / domElement.height) * 2 + 1;
+
     //onmousedown
     preIntersects.forEach(function(preIntersect) {
       var object = preIntersect.object;
@@ -18,11 +23,16 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
     mouseDownIntersects = preIntersects;
 
     preEvent = event;
-    mouseDownPoint = new THREE.Vector2(event.clientX, event.clientY);
+    mouseDownPoint = new THREE.Vector2(mouse.x, mouse.y);
   }
 
   function handleMouseUp(event) {
     event.preventDefault();
+
+    var mouse = new THREE.Vector2();
+    var rect = domElement.getBoundingClientRect();
+    mouse.x = ((event.clientX - rect.left) / domElement.width) * 2 - 1;
+    mouse.y = -((event.clientY - rect.top) / domElement.height) * 2 + 1;
 
     //onmouseup
     preIntersects.forEach(function(intersect) {
@@ -32,7 +42,7 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
       }
     });
 
-    if(mouseDownPoint.distanceTo(new THREE.Vector2(event.clientX, event.clientY)) < 5) {
+    if(mouseDownPoint.distanceTo(new THREE.Vector2(mouse.x, mouse.y)) < 5) {
       //onclick
       mouseDownIntersects.forEach(function (intersect) {
         var object = intersect.object;
