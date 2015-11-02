@@ -182,7 +182,8 @@ class Embryo {
   //画像サイズを調整
   static getSuitableImage(image) {
     var w = image.naturalWidth, h = image.naturalHeight;
-    var size = Math.pow(2, Math.log(Math.min(w, h)) / Math.LN2 | 0); // largest 2^n integer that does not exceed
+    //var size = Math.pow(2, Math.log(Math.min(w, h)) / Math.LN2 | 0); // largest 2^n integer that does not exceed
+    var size = 128;
     if (w !== h || w !== size) {
       var canvas = document.createElement('canvas');
       var offsetX = h / w > 1 ? 0 : (w - h) / 2;
