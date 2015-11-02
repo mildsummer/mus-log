@@ -75,7 +75,7 @@ class Embryo {
 
     this.count = 0;
 
-    console.log(this.frames);
+    //console.log(this.frames);
 
     var update = function(){
       controls.update();
