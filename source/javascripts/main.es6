@@ -122,8 +122,8 @@ import Embryo from './embryo.es6';
             $scope.$apply();
             container.css({
               //'-webkit-filter': 'blur(0px)'
-              '-webkit-transform': 'translateY(0) scale(1)',
-              'transform': 'translateY(0) scale(1)'
+              '-webkit-transform': 'translateY(0)',
+              'transform': 'translateY(0)'
             });
             contributionImage.css({
               'opacity': 0
@@ -143,8 +143,8 @@ import Embryo from './embryo.es6';
             });
             container.css({
               //'-webkit-filter': 'blur(10px)'
-              '-webkit-transform': 'translateY(45%) scale(0.6)',
-              'transform': 'translateY(45%) scale(0.6)'
+              '-webkit-transform': 'translateY(45%)',
+              'transform': 'translateY(45%)'
             });
             embryo.toggle();
           }
