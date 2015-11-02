@@ -111,6 +111,8 @@ import Embryo from './embryo.es6';
       contributes.getAll(function (data) {
         $scope.contributions = data;
         var container = $('.embryo-three');
+        $scope.visibility.loading = false;
+        $scope.$apply();
         var contributionImage = $('.embryo-contribution-image');
         embryo = new Embryo(data, container.get(0), container.width(), container.height());
         window.embryo = embryo;
@@ -151,7 +153,7 @@ import Embryo from './embryo.es6';
         postContribute: false,
         postLoading: false,
         three: true,
-        loading: false
+        loading: true
       };
 
       $scope.query = '';
