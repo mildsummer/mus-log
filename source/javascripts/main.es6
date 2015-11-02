@@ -9,7 +9,7 @@ import Embryo from './embryo.es6';
     .service('imageSearch', ['$http', function ($http) {
       this.getImages = function (query, callback) {
         var items = [];
-        var url = 'https://www.googleapis.com/customsearch/v1?key=AIzaSyCLRfeuR06RNPKbwFgoOnY0ze0IKESF7Kw&cx=001556568943546838350:0bdigrd1x8i&searchType=image&q=';
+        var url = 'https://www.googleapis.com/customsearch/v1?key=AIzaSyA0Qg9dhDft21hdvQFTJ0osjdTD0f_UbdI&cx=001556568943546838350:0bdigrd1x8i&searchType=image&q=';
         query = encodeURIComponent(query.replace(/\s+/g, ' '));
         $http({
           url: url + query,
@@ -26,8 +26,9 @@ import Embryo from './embryo.es6';
           .error(function (data, status, headers, config) {
             alert(status + ' ' + data.message);
           });
-        url = 'https://www.googleapis.com/customsearch/v1?key=AIzaSyCLRfeuR06RNPKbwFgoOnY0ze0IKESF7Kw&cx=001556568943546838350:0bdigrd1x8i&searchType=image&start=11&q=';
+        url = 'https://www.googleapis.com/customsearch/v1?key=AIzaSyA0Qg9dhDft21hdvQFTJ0osjdTD0f_UbdI&cx=001556568943546838350:0bdigrd1x8i&searchType=image&start=11&q=';
         query = encodeURIComponent(query.replace(/\s+/g, ' '));
+
         $http({
           url: url + query,
           method: 'GET'
