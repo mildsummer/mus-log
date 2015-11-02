@@ -3,6 +3,10 @@ input, button, textarea {
   outline: none;
 }
 
+textarea {
+  resize: none;
+}
+
 html {
   width: 100%;
   height: 100%;
