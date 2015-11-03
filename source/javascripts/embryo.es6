@@ -161,7 +161,8 @@ class Embryo {
         fragmentShader: fragmentShader,
         uniforms: {
           texture: { type: "t", value: data[index] ? data[index].texture : null },
-          opacity: { type: "f", value: 1.0 }
+          opacity: { type: "f", value: 1.0 },
+          offsetY: { type: "f", value: 0 }
         }
       });
 
@@ -252,16 +253,21 @@ class Embryo {
     return this;
   }
     
-  toggle() {
-    var TOTAL_COUNT = 36;
-    var START_POINT = this.frames.position.clone();
-    var END_POINT = this.isHidden ? new THREE.Vector3() : new THREE.Vector3(0, -200, -200);
+  toggle(duration) {
+    var TOTAL_COUNT = duration / (1000 / 60);
+    var OFFSET = 200;
+    var SCALE = 0.6;
     var count = 0;
-    console.log(START_POINT);
+    var startY = this.frames.position.y;
+    var endY = this.isHidden ? 0 : OFFSET;
+    var startScale = this.frames.scale;
+    var endScale = this.isHidden ? 1 : SCALE;
     var animate = () => {
       var n = count / TOTAL_COUNT - 1;
-      var newPoint = START_POINT.clone().mix(END_POINT, Math.pow(n, 5) + 1);
-      this.frames.position.set(newPoint.x, newPoint.y, newPoint.z);
+      n = Math.pow(n , 5) + 1;
+      this.frames.position.set(0, startY * (1 - n) + endY * n, 0);
+      var s = startScale * (1 - n) + endScale * n;
+      this.frames.scale.set(s, s, s);
       if(count < TOTAL_COUNT) {
         count++;
         window.requestAnimationFrame(animate);
