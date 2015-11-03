@@ -10,8 +10,8 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
 
     var mouse = new THREE.Vector2();
     var rect = domElement.getBoundingClientRect();
-    mouse.x = ((event.clientX - rect.left) / domElement.width) * 2 - 1;
-    mouse.y = -((event.clientY - rect.top) / domElement.height) * 2 + 1;
+    mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
 
     //onmousedown
     preIntersects.forEach(function(preIntersect) {
@@ -31,8 +31,8 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
 
     var mouse = new THREE.Vector2();
     var rect = domElement.getBoundingClientRect();
-    mouse.x = ((event.clientX - rect.left) / domElement.width) * 2 - 1;
-    mouse.y = -((event.clientY - rect.top) / domElement.height) * 2 + 1;
+    mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
 
     //onmouseup
     preIntersects.forEach(function(intersect) {
@@ -62,8 +62,8 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
 
     var mouse = new THREE.Vector2();
     var rect = domElement.getBoundingClientRect();
-    mouse.x = ((event.clientX - rect.left) / domElement.width) * 2 - 1;
-    mouse.y = -((event.clientY - rect.top) / domElement.height) * 2 + 1;
+    mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
     console.log(mouse);
 
     var raycaster = new THREE.Raycaster();
