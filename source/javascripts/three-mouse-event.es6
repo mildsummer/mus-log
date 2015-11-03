@@ -64,6 +64,7 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
     var rect = domElement.getBoundingClientRect();
     mouse.x = ((event.clientX - rect.left) / domElement.width) * 2 - 1;
     mouse.y = -((event.clientY - rect.top) / domElement.height) * 2 + 1;
+    console.log(mouse);
 
     var raycaster = new THREE.Raycaster();
     raycaster.setFromCamera(mouse, camera);
