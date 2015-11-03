@@ -129,7 +129,7 @@ import Embryo from './embryo.es6';
             contributionImage.css({
               'opacity': 0
             });
-            embryo.toggle();
+            embryo.toggle(600);
           } else {
             $scope.hasSelected = true;
             $scope.visibility.contributionDetails = 'shown';
@@ -143,7 +143,7 @@ import Embryo from './embryo.es6';
               'backgroundSize': 'cover',
               'opacity': 1
             });
-            embryo.toggle();
+            embryo.toggle(600);
           }
         };
       });
