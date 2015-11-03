@@ -75,8 +75,12 @@ router.get('/image/:id', function(req, res) {
     if(!err) {
       fs.readFile(contribution.base64, function(err, data){   //neko.jpgを読み込み、function(err,data)の呼び出し
 //          console.log(data);
-        res.set('Content-Type', 'image/jpeg');  //ヘッダの指定 jpeg
-        res.send(data);   //送信
+        if(!err) {
+          res.set('Content-Type', 'image/jpeg');  //ヘッダの指定 jpeg
+          res.send(data);   //送信
+        } else {
+          res.send(JSON.stringify(err));
+        }
       });
     } else {
       res.send('データ取得エラー');
