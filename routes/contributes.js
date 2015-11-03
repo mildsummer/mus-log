@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
-var fs = require('fs');
+var base64 = require('urlsafe-base64');
 var Contribution = require('../models/contribution');
 var User = require('../models/user');
 
@@ -73,15 +73,10 @@ router.get('/all', function(req, res) {
 router.get('/image/:id', function(req, res) {
   Contribution.findOne({_id: req.param('id')}).exec(function(err, contribution) {
     if(!err) {
-      fs.readFile(contribution.base64, function(err, data){   //neko.jpgを読み込み、function(err,data)の呼び出し
-//          console.log(data);
-        if(!err) {
-          res.set('Content-Type', 'image/jpeg');  //ヘッダの指定 jpeg
-          res.send(data);   //送信
-        } else {
-          res.send(JSON.stringify(err));
-        }
-      });
+        var data = contribution.base64.split(',');
+        var image = base64.decode(data[1]);
+        res.set('Content-Type', data[0].split(':')[1].split(';')[0]);
+        res.send(image);
     } else {
       res.send('データ取得エラー');
     }
