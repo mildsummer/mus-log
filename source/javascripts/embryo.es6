@@ -260,7 +260,7 @@ class Embryo {
     var SCALE = 0.6;
     var count = 0;
     var startY = this.frames.position.y;
-    var endY = this.isHidden ? 0 : OFFSET;
+    var endY = this.isHidden ? 0 : -OFFSET;
     var startScale = this.frames.scale.x;
     var endScale = this.isHidden ? 1 : SCALE;
     var animate = () => {
