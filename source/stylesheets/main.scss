@@ -298,12 +298,17 @@ header {
         textarea.text:focus {
           color: #000;
         }
-        input.button {
-          background: none;
-          border: none;
-          text-decoration: underline;
+        a.button {
+          color: #000;
           display: block;
-          margin: 0 auto;
+          .change-border__inner::after,
+          .change-border__inner::before {
+            background-color: #000;
+          }
+        }
+        .change-border::after,
+        .change-border::before {
+          background-color: #000;
         }
       }
       button {
