@@ -138,7 +138,7 @@ class Embryo {
       'uniform float opacity;' +
       'varying vec4 vPosition;' +
       'void main(void){' +
-      '  vec4 textureColor = texture2D(texture, vec2((1.0 + vPosition.x / 100.0) / 2.0, (1.0 + vPosition.y / 100.0) / 2.0));' +
+      '  vec4 textureColor = texture2D(texture, vec2((1.0 + vPosition.x / 210.0) / 2.0, (1.0 + vPosition.y / 210.0) / 2.0));' +
       '  textureColor.w = opacity;' +
       '  gl_FragColor = textureColor;' +
       //'      gl_FragColor = vec4((vPosition.x / 800.0 + 1.0) / 2.0, (vPosition.y / 800.0 + 1.0) / 2.0, 0, 0);' +
