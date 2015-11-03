@@ -59,7 +59,7 @@ block content
             textarea(ng-model='selectedContributionText' class='text') {{selectedContributionText}}
             a(class='button change-border' ng-click='editText()')
               span.change-border__inner {{contributionDetailsMessage}}
-          //img(ng-src='{{selectedContribution.base64}}')
+          //img(ng-src='./contributes/image/{{selectedContribution._id}}')
           //input(type='button' ng-click='closeLightbox()' value='close')
         div.embryo-contribution-image
       div(class='embryo-three {{visibility.three ? "show" : "hidden"}}')

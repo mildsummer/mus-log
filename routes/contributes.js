@@ -59,8 +59,8 @@ router.post('/edit', function(req, res) {
 });
 
 router.get('/all', function(req, res) {
-//Contribution.find({user: req.session.passport.user.id}).exec(function(err, contributions) {
-  Contribution.find({user: '16022399'}).exec(function(err, contributions) {
+//Contribution.find({user: req.session.passport.user.id}).select({base64: 0}).exec(function(err, contributions) {
+  Contribution.find({user: '16022399'}).select({base64: 0}).exec(function(err, contributions) {
   if(!err) {
       res.send(contributions);
     } else {

@@ -139,7 +139,7 @@ import Embryo from './embryo.es6';
             $scope.visibility.three = false;
             $scope.$apply();
             contributionImage.css({
-              'backgroundImage': 'url(' + contribution.base64 + ')',
+              'backgroundImage': 'url(./contributes/image/' + contribution._id + ')',
               'backgroundSize': 'cover',
               'opacity': 1
             });

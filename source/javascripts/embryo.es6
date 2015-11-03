@@ -30,7 +30,7 @@ class Embryo {
           this.initialize(container, width, height);
         }
       };
-      image.src = contribution.base64;
+      image.src = './contributes/image/' + contribution._id;
     });
 
     return this;
@@ -241,7 +241,7 @@ class Embryo {
       this.data.push(contribution);
       this.clear().create(callback);//リセット
     };
-    image.src = contribution.base64;
+    image.src = './contributes/image/' + contribution._id;
 
     return this;
   }
