@@ -74,7 +74,7 @@ router.get('/image/:id', function(req, res) {
   Contribution.findOne({_id: req.param('id')}).exec(function(err, contribution) {
     if(!err) {
       fs.readFile(contribution.base64, function(err, data){   //neko.jpgを読み込み、function(err,data)の呼び出し
-          console.log(data);
+//          console.log(data);
         res.set('Content-Type', 'image/jpeg');  //ヘッダの指定 jpeg
         res.send(data);   //送信
       });
