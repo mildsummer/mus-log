@@ -310,6 +310,17 @@ header {
         width: 30px;
         height: 100%;
         float: left;
+        position: relative;
+        .toggle-button-icon {
+            width: 0;
+            height: 25px;
+            border-right: dotted 5px #000;
+            position: absolute;
+            top: 50%;
+            margin-top: -12.5px;
+            left: 50%;
+            margin-left: -2.5px;
+        }
       }
       .embryo-contribution-details-form {
         width: calc(100% - 60px);

@@ -47,6 +47,7 @@ block content
       div(class='embryo-contribution {{hasSelected ? "shown" : "hidden"}}')
         div(class='embryo-contribution-details {{visibility.contributionDetails}}')
           div(class='toggle-button' ng-click='toggleContributionDetails()')
+            div.toggle-button-icon
           form.embryo-contribution-details-form
             textarea(ng-model='selectedContributionText' class='text') {{selectedContributionText}}
             a(class='button change-border' ng-click='editText()')
