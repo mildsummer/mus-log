@@ -77,9 +77,38 @@ header {
     width: 100%;
     height: 100%;
     z-index: 999;
-    background-image: url(../images/loading.gif);
-    background-repeat: no-repeat;
-    background-position: center center;
+//    background-image: url(../images/loading.gif);
+//    background-repeat: no-repeat;
+//    background-position: center center;
+      .loading-triangle {
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            border-top: solid 17.32px #000;
+            border-bottom: none;
+            transform-origin: bottom;
+            position: absolute;
+      }
+      .loading-triangle:nth-child(2) {
+            transform: rotate(60deg);
+            animation: loading 1s ease 0.1 infinite alternate;
+      }
+      .loading-triangle:nth-child(3) {
+            transform: rotate(120deg);
+            animation: loading 1s ease 0.1 infinite alternate;
+      }
+      .loading-triangle:nth-child(4) {
+            transform: rotate(180deg);
+            animation: loading 1s ease 0.1 infinite alternate;
+      }
+      .loading-triangle:nth-child(5) {
+            transform: rotate(240deg);
+            animation: loading 1s ease 0.1 infinite alternate;
+      }
+      .loading-triangle:nth-child(6) {
+            transform: rotate(300deg);
+            animation: loading 1s ease 0.1 infinite alternate;
+      }
   }
   .loading.hidden {
     display: none;
@@ -441,6 +470,15 @@ header {
 .change-border:hover .change-border__inner::before {
     height: 100%;
     height: calc(100% + 1px);
+}
+
+@keyframes loading {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 @keyframes arrow {
