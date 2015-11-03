@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
+var fs = require('fs');
 var Contribution = require('../models/contribution');
 var User = require('../models/user');
 
@@ -62,6 +63,21 @@ router.get('/all', function(req, res) {
   Contribution.find({user: '16022399'}).exec(function(err, contributions) {
   if(!err) {
       res.send(contributions);
+    } else {
+      res.send('データ取得エラー');
+    }
+  });
+});
+
+//画像を取得
+router.get('/image/:id', function(req, res) {
+  Contribution.findOne({_id: req.param('id')}).exec(function(err, contribution) {
+    if(!err) {
+      fs.readFile(contribution.base64, function(err, data){   //neko.jpgを読み込み、function(err,data)の呼び出し
+          console.log(data);
+        res.set('Content-Type', 'image/jpeg');  //ヘッダの指定 jpeg
+        res.send(data);   //送信
+      });
     } else {
       res.send('データ取得エラー');
     }

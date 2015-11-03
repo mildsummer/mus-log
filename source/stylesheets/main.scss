@@ -5,6 +5,7 @@ input, button, textarea {
 
 textarea {
   resize: none;
+  background: none;
 }
 
 html {
@@ -301,6 +302,7 @@ header {
         a.button {
           color: #000;
           display: block;
+          text-align: center;
           .change-border__inner::after,
           .change-border__inner::before {
             background-color: #000;
@@ -403,6 +405,7 @@ header {
       z-index: -99;
       transition: opacity 0.6s ease;
       opacity: 0;
+      background-position: center;
     }
   }
   .embryo-three {

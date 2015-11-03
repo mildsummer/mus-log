@@ -16,6 +16,7 @@
     "ejs": "^2.3.4",
     "express": "~4.13.1",
     "express-session": "^1.11.3",
+    "fs": "0.0.2",
     "gulp": "~3.8.11",
     "gulp-autoprefixer": "^3.0.2",
     "gulp-concat": "^2.6.0",
