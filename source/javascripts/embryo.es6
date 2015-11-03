@@ -254,15 +254,17 @@ class Embryo {
   }
     
   toggle(duration) {
+      console.log(duration);
     var TOTAL_COUNT = duration / (1000 / 60);
     var OFFSET = 200;
     var SCALE = 0.6;
     var count = 0;
     var startY = this.frames.position.y;
     var endY = this.isHidden ? 0 : OFFSET;
-    var startScale = this.frames.scale;
+    var startScale = this.frames.scale.x;
     var endScale = this.isHidden ? 1 : SCALE;
     var animate = () => {
+        console.log("animate");
       var n = count / TOTAL_COUNT - 1;
       n = Math.pow(n , 5) + 1;
       this.frames.position.set(0, startY * (1 - n) + endY * n, 0);

@@ -64,7 +64,6 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
     var rect = domElement.getBoundingClientRect();
     mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
     mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-    console.log(mouse);
 
     var raycaster = new THREE.Raycaster();
     raycaster.setFromCamera(mouse, camera);
@@ -72,7 +71,6 @@ THREE.Scene.prototype.watchMouseEvent = function(domElement, camera) {
     var intersects = raycaster.intersectObjects(_this.children, true);
     intersects.length = 1;//手前のオブジェクトのみ
 
-    //console.log(intersects);
     intersects.forEach(function (intersect) {
       var object = intersect.object;
       //onmousemove
