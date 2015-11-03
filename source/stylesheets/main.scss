@@ -85,12 +85,12 @@ header {
             height: 0;
             border: 10px solid transparent;
             border-top: solid 17.32px #000;
-            border-bottom: none;
+            border-bottom: solid 1px transparent;
             transform-origin: bottom;
             position: absolute;
             top: 50%;
             left: 50%;
-            margin-top: -17.32px;
+            margin-top: -18.32px;
             margin-left: -10px;
       }
       .loading-triangle:nth-child(1) {

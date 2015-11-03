@@ -48,7 +48,8 @@ block content
             img(class='embryo-post-image' ng-src='{{selectedItem.link}}')
             span memo:
             textarea(ng-model='text' class='text') {{text}}
-            input(type='button' class='button' ng-click='submit()' value='Upload')
+            a(class='button change-border' ng-click='submit()')
+              span.change-border__inner Upload
           button(class='back' ng-click='backToSearch()')
       div(class='embryo-contribution {{hasSelected ? "shown" : "hidden"}}')
         div(class='embryo-contribution-details {{visibility.contributionDetails}}')
