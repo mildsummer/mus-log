@@ -73,10 +73,11 @@ router.get('/all', function(req, res) {
 router.get('/image/:id', function(req, res) {
   Contribution.findOne({_id: req.param('id')}).exec(function(err, contribution) {
     if(!err) {
-        var data = contribution.base64.split(',');
-        var image = base64.decode(data[1]);
-        res.set('Content-Type', data[0].split(':')[1].split(';')[0]);
-        res.send(image);
+      var data = contribution.base64.split(',');
+      var image = base64.decode(data[1]);
+      res.set('Content-Type', data[0].split(':')[1].split(';')[0]);
+      res.set('Cache-Control': 'max-age=31536000');
+      res.send(image);
     } else {
       res.send('データ取得エラー');
     }
