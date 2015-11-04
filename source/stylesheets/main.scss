@@ -6,6 +6,7 @@ input, button, textarea {
 textarea {
   resize: none;
   background: none;
+  font-style: italic;
 }
 
 html {
@@ -235,6 +236,12 @@ header {
           display: block;
           margin: 0 auto;
           outline: none;
+        }
+        input.text::-webkit-input-placeholder {
+           color:    #CCC;
+         }
+        input.text:-moz-placeholder {
+          color:    #CCC;
         }
         input.button {
           background: none;
