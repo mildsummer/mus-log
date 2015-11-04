@@ -38,7 +38,7 @@ block content
         div(class='embryo-post-search {{visibility.postSearch ? "shown" : "hidden"}}')
           div.embryo-post-search-form
             input(class='text' type='text' ng-model='query' placeholder='Search artwork')
-            input(class='button' type='button' ng-click='search()' value='Search')
+            input(class='button' type='button' ng-click='search()')
           div.embryo-post-search-results
             ul(class='items')
               li(class='item' ng-repeat='item in items')

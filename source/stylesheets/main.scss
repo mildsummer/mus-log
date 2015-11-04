@@ -241,6 +241,7 @@ header {
           display: block;
           margin: 0 auto;
           outline: none;
+          padding-right: 40px;
         }
         input.text::-webkit-input-placeholder {
            color:    #CCC;
@@ -254,10 +255,8 @@ header {
           float: right;
           margin-top: -40px;
           border: none;
-          text-decoration: underline;
-          background-image: url('../images/search.png');
-          background-position: center;
-          background-repeat: no-repeat;
+          background: url(../images/search.png) center no-repeat, 21px 20px;
+          background-size: 18px 17px;
         }
       }
       .embryo-post-search-results {
