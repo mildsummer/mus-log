@@ -46,7 +46,7 @@ block content
         div(class='embryo-post-contribute {{visibility.postContribute ? "shown" : "hidden"}}')
           form(method="POST" action="./contributes/post")
             img(class='embryo-post-image' ng-src='{{selectedItem.link}}')
-            span memo:
+            span.embryo-post-span memo:
             textarea(ng-model='text' class='text') {{text}}
             a(class='button change-border' ng-click='submit()')
               span.change-border__inner Upload
